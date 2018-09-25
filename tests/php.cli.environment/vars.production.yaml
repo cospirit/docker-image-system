@@ -1,0 +1,11 @@
+Core:
+  error_reporting: 22527
+  display_errors: "Off"
+  display_startup_errors: "Off"
+  expose_php: "Off"
+  zend:
+    assertions: -1
+
+OPcache:
+  opcache:
+    validate_timestamps: "Off"

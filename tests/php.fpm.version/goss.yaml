@@ -1,0 +1,6 @@
+http:
+  # App
+  http://localhost:
+    status: 200
+    body:
+      - '/^php: {{ .Vars.php }}$/'

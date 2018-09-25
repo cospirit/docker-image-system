@@ -1,0 +1,6 @@
+http:
+  # App
+  http://localhost:
+    status: 200
+    body:
+      - '/^date.timezone: {{ .Vars.date.timezone }}$/'

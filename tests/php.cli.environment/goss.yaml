@@ -1,0 +1,13 @@
+command:
+  php --ri Core:
+    exit-status: 0
+    stdout:
+      - /^error_reporting => {{ .Vars.Core.error_reporting }} => {{ .Vars.Core.error_reporting }}$/
+      - /^display_errors => {{ .Vars.Core.display_errors }} => {{ .Vars.Core.display_errors }}$/
+      - /^display_startup_errors => {{ .Vars.Core.display_startup_errors }} => {{ .Vars.Core.display_startup_errors }}$/
+      - /^expose_php => {{ .Vars.Core.expose_php }} => {{ .Vars.Core.expose_php }}$/
+      - /^zend.assertions => {{ .Vars.Core.zend.assertions }} => {{ .Vars.Core.zend.assertions }}$/
+  php --ri "Zend OPcache":
+    exit-status: 0
+    stdout:
+      - /^opcache.validate_timestamps => {{ .Vars.OPcache.opcache.validate_timestamps }} => {{ .Vars.OPcache.opcache.validate_timestamps }}$/

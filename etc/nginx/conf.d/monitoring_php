@@ -1,0 +1,24 @@
+server {
+    listen 10000;
+
+    access_log off;
+
+    error_page 404 /404.html;
+    error_page 500 502 503 504 /50x.html;
+
+    location = /ping {
+        include ../conf.d/fastcgi_php;
+        fastcgi_param SCRIPT_NAME /ping;
+        fastcgi_param SCRIPT_FILENAME /ping;
+    }
+
+    location = /nginx/status {
+        stub_status on;
+    }
+
+    location = /php/status {
+        include ../conf.d/fastcgi_php;
+        fastcgi_param SCRIPT_NAME /status;
+        fastcgi_param SCRIPT_FILENAME /status;
+    }
+}

@@ -1,0 +1,45 @@
+file:
+  # Docker output
+  /goss/docker_output.log:
+    exists: true
+    contains:
+      - '/^\[.*\] system.INFO: Set group id "1001"$/'
+      - '/^\[.*\] system.INFO: Set user id "1001"$/'
+  # Command (sleep) should be run as user
+  /proc/1/status:
+    exists: true
+    contains:
+      - /^Name:\tsleep$/
+      - /^Umask:\t0022$/
+      - /^Uid:\t1001\t1001\t1001\t1001$/
+      - /^Gid:\t1001\t1001\t1001\t1001$/
+  # Home
+  /home/app:
+    exists: true
+    mode: "0755"
+    owner: app
+    group: app
+    filetype: directory
+  # Workdir
+  /srv/app:
+    exists: true
+    mode: "0755"
+    owner: app
+    group: app
+    filetype: directory
+    contains: []
+
+user:
+  app:
+    exists: true
+    uid: 1001
+    gid: 1001
+    groups:
+      - app
+    home: /home/app
+    shell: /bin/bash
+
+group:
+  app:
+    exists: true
+    gid: 1001

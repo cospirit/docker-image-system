@@ -1,0 +1,25 @@
+http:
+  # Monitoring - Ping
+  http://localhost:10000/ping:
+    status: 200
+    body:
+      - '/^pong$/'
+  # Monitoring - Nginx - Status
+  http://localhost:10000/nginx/status:
+    status: 200
+    body:
+      - '/^Active connections: /'
+      - /^server accepts handled requests$/
+{{ if .Vars.php }}
+  # Monitoring - Php - Status
+  http://localhost:10000/php/status:
+    status: 200
+    body:
+      - '/^pool: /'
+      - '/^process manager: /'
+{{ end }}
+  # App
+  http://localhost:
+    status: 200
+    body:
+      - '/^app: {{ .Vars.app }}$/'

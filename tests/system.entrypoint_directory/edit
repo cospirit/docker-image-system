@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+export GOSS_PATH=${DIR}/../goss-linux-amd64
+export GOSS_FILES_PATH=${DIR}
+
+${DIR}/../dgoss edit \
+    --env FOO=bar \
+    --mount type=bind,source=${DIR}/fixtures/entrypoint.d,target=/home/app/entrypoint.d \
+    ardeveloppement/system \
+    sleep infinity

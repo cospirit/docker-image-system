@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "One of these days"
+echo "FOO: ${FOO}"

@@ -1,0 +1,5 @@
+command:
+  php --ri Core:
+    exit-status: 0
+    stdout:
+      - /^memory_limit => {{ .Vars.Core.memory_limit }} => {{ .Vars.Core.memory_limit }}$/

@@ -1,0 +1,23 @@
+server_tokens off;
+
+default_type application/octet-stream;
+
+log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                '$status $body_bytes_sent "$http_referer" '
+                '"$http_user_agent" "$http_x_forwarded_for" ';
+
+access_log /dev/stdout main;
+
+send_timeout 60s;
+
+keepalive_timeout 75s;
+
+client_max_body_size 1m;
+client_body_buffer_size 16K;
+large_client_header_buffers 4 8k;
+
+set_real_ip_from 127.0.0.1;
+
+fastcgi_read_timeout 60s;
+
+include ../mime.types;

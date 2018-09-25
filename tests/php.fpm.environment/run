@@ -1,0 +1,100 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+export GOSS_PATH=${DIR}/../goss-linux-amd64
+export GOSS_FILES_PATH=${DIR}
+
+RETURN=0
+
+printf "\n\033[36mTEST\033[0m [Default]\n\n"
+
+export GOSS_VARS=vars.default.yaml
+
+${DIR}/../dgoss run \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Default - Php 7.1]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.1 \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Default - Php 7.2]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.2 \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Development]\n\n"
+
+export GOSS_VARS=vars.development.yaml
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=development \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Development - Php 7.1]\n\n"
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=development \
+    --env PHP_VERSION=7.1 \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Development - Php 7.2]\n\n"
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=development \
+    --env PHP_VERSION=7.2 \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Production]\n\n"
+
+export GOSS_VARS=vars.production.yaml
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=production \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Production - Php 7.1]\n\n"
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=production \
+    --env PHP_VERSION=7.1 \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Production - Php 7.2]\n\n"
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=production \
+    --env PHP_VERSION=7.2 \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system \
+    supervisord --configuration /etc/supervisor/app/php.conf \
+    || ((RETURN++))
+
+exit ${RETURN}

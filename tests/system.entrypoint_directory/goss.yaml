@@ -1,0 +1,10 @@
+file:
+  # Docker output
+  /goss/docker_output.log:
+    exists: true
+    contains:
+      - /^One of these days$/
+      - '/^FOO: bar$/'
+      - /^I'm going to cut you into little pieces$/
+      - '/^whoami: app$/'
+      - '/^pwd: /srv/app$/'

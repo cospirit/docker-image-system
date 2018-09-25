@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -e
+
+# User / Group
+if [[ ! -z ${USER_ID} || ! -z ${GROUP_ID} ]]; then
+    GROUP_ID=${GROUP_ID:-1000}
+    if [[ ${GROUP_ID} != 1000 ]]; then
+        printf "[`date +'%F %T'`] system.INFO: Set group id \"${GROUP_ID}\"\n"
+        groupmod --gid ${GROUP_ID} app
+        chgrp -R app /home/app
+    fi
+    USER_ID=${USER_ID:-1000}
+    if [[ ${USER_ID} != 1000 ]]; then
+        printf "[`date +'%F %T'`] system.INFO: Set user id \"${USER_ID}\"\n"
+    fi
+    if [[ ${USER_ID} != 1000 || ${GROUP_ID} != 1000 ]]; then
+        usermod --uid ${USER_ID} --gid ${GROUP_ID} app &> /dev/null
+        chown app:app /srv/app
+    fi
+fi
+
+# Configure
+/root/configure
+
+# Entrypoint directory
+su app -c "cd /srv/app && run-parts --exit-on-error ~/entrypoint.d"
+
+# Supervisor
+if [ "${1#supervisord}" != "$1" ]; then
+    exec "$@"
+else
+    exec gosu app "$@"
+fi

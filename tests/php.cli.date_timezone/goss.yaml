@@ -1,0 +1,5 @@
+command:
+  php --ri date:
+    exit-status: 0
+    stdout:
+      - /^date.timezone => {{ .Vars.date.timezone }} => {{ .Vars.date.timezone }}$/

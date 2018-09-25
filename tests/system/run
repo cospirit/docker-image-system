@@ -1,0 +1,16 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+export GOSS_PATH=${DIR}/../goss-linux-amd64
+export GOSS_FILES_PATH=${DIR}
+
+RETURN=0
+
+${DIR}/../dgoss run \
+    --env FOO=bar \
+    ardeveloppement/system \
+    sleep infinity \
+    || ((RETURN++))
+
+exit ${RETURN}

@@ -1,0 +1,129 @@
+package:
+  # Build packages should not be present
+  apt-utils:
+    installed: false
+  gnupg:
+    installed: false
+  curl:
+    installed: false
+  # Packages
+  apt-transport-https:
+    installed: true
+  ca-certificates:
+    installed: true
+
+file:
+  # Debian
+  /etc/os-release:
+    exists: true
+    contains:
+      - /^VERSION="\d{1} \(stretch\)"$/
+  # Command (sleep) should be run as user
+  /proc/1/status:
+    exists: true
+    contains:
+      - /^Name:\tsleep$/
+      - /^Umask:\t0022$/
+      - /^Uid:\t1000\t1000\t1000\t1000$/
+      - /^Gid:\t1000\t1000\t1000\t1000$/
+  # Home
+  /home/app:
+    exists: true
+    mode: "0755"
+    owner: app
+    group: app
+    filetype: directory
+  # Workdir
+  /srv/app:
+    exists: true
+    mode: "0755"
+    owner: app
+    group: app
+    filetype: directory
+  # Entrypoint directory
+  /home/app/entrypoint.d:
+    exists: true
+    mode: "0755"
+    owner: app
+    group: app
+    filetype: directory
+
+command:
+  # User
+  whoami:
+    exit-status: 0
+    stdout:
+      - /^root$/
+  # Workdir
+  pwd:
+    exit-status: 0
+    stdout:
+      - /^/srv/app$/
+  # Vi
+  vi --version:
+    exit-status: 0
+    stdout:
+      - /^VIM - Vi IMproved/
+  # Mln
+  which mln:
+    exit-status: 0
+  # Sudo
+  sudo --version:
+    exit-status: 0
+    stdout:
+      - /^Sudo version/
+  # Supervisor
+  supervisorctl --help:
+    exit-status: 0
+    stdout:
+      - /^supervisorctl -- control applications run by supervisord from the cmd line.$/
+  # Make
+  make --version:
+    exit-status: 0
+    stdout:
+      - /^GNU Make/
+  # Git
+  git --version:
+    exit-status: 0
+    stdout:
+      - /^git version/
+  # Unzip
+  unzip:
+    exit-status: 0
+    stdout:
+      - /^UnZip/
+  # Gosu
+  gosu:
+    exit-status: 1
+    stderr:
+      - '/^gosu version: 1.10/'
+  # Gomplate
+  gomplate --version:
+    exit-status: 0
+    stdout:
+      - /^gomplate version 3.0.0$/
+  # Passwordless sudoer
+  su app -c "sudo whoami":
+    exit-status: 0
+    stdout:
+      - /^root$/
+  # Keep sudo env
+  su app -c "sudo env":
+    exit-status: 0
+    stdout:
+      - /^FOO=bar$/
+
+user:
+  app:
+    exists: true
+    uid: 1000
+    gid: 1000
+    groups:
+      - app
+    home: /home/app
+    shell: /bin/bash
+
+group:
+  app:
+    exists: true
+    gid: 1000
