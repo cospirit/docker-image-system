@@ -7,7 +7,7 @@
 
 trap 'kill -TERM $PID' TERM INT
 
-php-fpm7.2 --fpm-config /etc/php/7.2/fpm/php-fpm.conf --force-stderr 2> >(sed -u -E -e 's/^\[[^]]+\] WARNING: \[pool [^]]+\] child [0-9]+ said into std(err|out): "(.*)("|...)$/\2\3/' -e 's/"$//') &
+php-fpm{{ getenv "PHP_VERSION" }} --fpm-config /etc/php/{{ getenv "PHP_VERSION" }}/fpm/php-fpm.conf --force-stderr 2> >(sed -u -E -e 's/^\[[^]]+\] WARNING: \[pool [^]]+\] child [0-9]+ said into std(err|out): "(.*)("|...)$/\2\3/' -e 's/"$//') &
 
 PID=$!
 

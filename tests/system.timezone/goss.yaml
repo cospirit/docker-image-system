@@ -1,0 +1,11 @@
+file:
+  /etc/timezone:
+    exists: true
+    contains:
+      - /^{{ .Vars.timezone }}$/
+
+command:
+  date +%Z:
+    exit-status: 0
+    stdout:
+      - /^{{ .Vars.date }}$/

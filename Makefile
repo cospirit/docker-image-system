@@ -14,30 +14,31 @@ build:
 		--tag $(IMAGE) \
 		.
 
-## Tag image
+## Tag image (VERSION)
 tag:
 	docker tag \
 		$(IMAGE) \
 		$(IMAGE):$(VERSION)
 
-## Push image tag
+## Push image tag into repository (VERSION)
 push:
+	$(call confirm, Confirm pushing of image $(COLOR_COMMENT)$(IMAGE):$(VERSION))
 	docker push \
 		$(IMAGE):$(VERSION)
 
 ## Run temporary image's container (APP,ENVIRONMENT,PHP_VERSION)
 run:
+	$(call message, ~(‾▿‾)~ Browse at $(COLOR_COMMENT)http://127.0.0.1:9000)
 	docker run \
 		--rm \
-		$(if $(APP),,--tty --interactive) \
+		$(if $(APP),--env APP=$(APP)) \
 		$(if $(ENVIRONMENT),--env ENVIRONMENT=$(ENVIRONMENT)) \
 		$(if $(PHP_VERSION),--env PHP_VERSION=$(PHP_VERSION)) \
 		$(if $(APP),--mount type=bind$(,)source=$(PWD)/tests/app/fixtures/$(APP)$(,)target=/srv/app) \
 		--name $(subst /,_,$(IMAGE)) \
 		--publish 9000:80 \
 		--publish 9001:10000 \
-		$(IMAGE) \
-		$(if $(APP),supervisord --configuration /etc/supervisor/app/$(APP).conf)
+		$(IMAGE)
 
 ## Run temporary image's container / Angular (ENVIRONMENT)
 run/angular: APP = angular

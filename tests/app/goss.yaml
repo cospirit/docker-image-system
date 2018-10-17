@@ -10,6 +10,13 @@ http:
     body:
       - '/^Active connections: /'
       - /^server accepts handled requests$/
+  # App
+  http://localhost:
+    status: 200
+{{ if .Vars.app }}
+    body:
+      - '/^app: {{ .Vars.app }}$/'
+{{ end }}
 {{ if .Vars.php }}
   # Monitoring - Php - Status
   http://localhost:10000/php/status:
@@ -18,8 +25,3 @@ http:
       - '/^pool: /'
       - '/^process manager: /'
 {{ end }}
-  # App
-  http://localhost:
-    status: 200
-    body:
-      - '/^app: {{ .Vars.app }}$/'

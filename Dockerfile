@@ -20,15 +20,14 @@ RUN \
     && apt-get install -y --no-install-recommends ${BUILD_PACKAGES} \
         apt-transport-https \
         vim-tiny \
-        mmv \
+        less \
+        procps \
         ca-certificates \
         sudo \
         supervisor \
         make \
         git \
         unzip \
-        gettext-base \
-    && rm -rf /var/lib/apt/lists/* \
     # User
     && adduser --disabled-password --gecos "" app \
     # Sudo
@@ -43,7 +42,7 @@ RUN \
         -o /usr/local/bin/gosu \
     && chown root:root /usr/local/bin/gosu && chmod +x /usr/local/bin/gosu \
     # Gomplate
-    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v3.0.0/gomplate_linux-amd64-slim \
+    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v3.0.0/gomplate_linux-amd64 \
         -o /usr/local/bin/gomplate \
     && chown root:root /usr/local/bin/gomplate && chmod +x /usr/local/bin/gomplate \
     \
@@ -83,6 +82,7 @@ RUN \
     && apt-get install -y --no-install-recommends \
         php7.1-cli php7.2-cli \
         php7.1-fpm php7.2-fpm \
+        # Modules - Default
         php7.1-json php7.2-json \
         php7.1-opcache php7.2-opcache \
         php7.1-readline php7.2-readline \
@@ -91,13 +91,10 @@ RUN \
         php7.1-mbstring php7.2-mbstring \
         php7.1-intl php7.2-intl \
         php-apcu-bc \
+        # Modules - Extra
         php7.1-zip php7.2-zip \
         php7.1-mysql php7.2-mysql \
         php-xdebug \
-    # Create run directory
-    && mkdir -p /run/php \
-    # Disable uncommon modules
-    && phpdismod -v ALL -s ALL zip mysqli mysqlnd pdo_mysql xdebug \
     # Composer
     && curl -sSL https://getcomposer.org/installer \
         | php -- --install-dir /usr/local/bin --filename composer \
@@ -120,19 +117,45 @@ RUN \
 # Config #
 ##########
 
-COPY etc/supervisor/     /etc/supervisor/
-COPY etc/nginx/          /etc/nginx/
-COPY etc/php/            /etc/php/7.1/
-COPY etc/php/            /etc/php/7.2/
+COPY etc/supervisor/ /etc/supervisor/
+COPY etc/nginx/      /etc/nginx/
+COPY etc/php/        /etc/php/7.1/
+COPY etc/php/        /etc/php/7.2/
+
+COPY root/ /root/
+
+ENV APP="" \
+    PHP_VERSION="7.2" \
+    PHP_MODULES_EXTRA="" \
+    PHP_DATE_TIMEZONE="UTC" \
+    SYSTEM_TIMEZONE="Etc/UTC" \
+    ENVIRONMENT="production"
+
+RUN /root/configure
+
+ONBUILD ARG DEFAULT_APP
+ONBUILD ARG DEFAULT_PHP_VERSION
+ONBUILD ARG DEFAULT_PHP_MODULES_EXTRA
+ONBUILD ARG DEFAULT_PHP_DATE_TIMEZONE
+ONBUILD ARG DEFAULT_SYSTEM_TIMEZONE
+ONBUILD ARG DEFAULT_ENVIRONMENT
+
+ONBUILD ENV APP=${DEFAULT_APP:-${APP}} \
+            PHP_VERSION=${DEFAULT_PHP_VERSION:-${PHP_VERSION}} \
+            PHP_MODULES_EXTRA=${DEFAULT_PHP_MODULES_EXTRA:-${PHP_MODULES_EXTRA}} \
+            PHP_VERSION=${DEFAULT_PHP_VERSION:-${PHP_VERSION}} \
+            PHP_DATE_TIMEZONE=${DEFAULT_PHP_DATE_TIMEZONE:-${PHP_DATE_TIMEZONE}} \
+            SYSTEM_TIMEZONE=${DEFAULT_SYSTEM_TIMEZONE:-${SYSTEM_TIMEZONE}} \
+            ENVIRONMENT=${DEFAULT_ENVIRONMENT:-${ENVIRONMENT}}
+
+ONBUILD RUN /root/configure
 
 #######
 # Run #
 #######
 
-COPY root/ /root/
-
 ENTRYPOINT ["/root/entrypoint"]
 
 WORKDIR /srv/app
 
-CMD ["bash"]
+CMD ["supervisord", "--configuration", "/etc/supervisor/app.conf"]
