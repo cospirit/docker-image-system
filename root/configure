@@ -2,124 +2,74 @@
 
 set -e
 
-# See: https://www.tutorialspoint.com/unix/unix-regular-expressions.htm
+#####################
+# System - Timezone #
+#####################
 
-#######
-# Php #
-#######
+SYSTEM_TIMEZONE_CURRENT=$(cat /etc/timezone)
 
-# Version
-if [[ ! -z ${PHP_VERSION} ]]; then
+if [ ${SYSTEM_TIMEZONE} != ${SYSTEM_TIMEZONE_CURRENT} ]; then
+    printf "[`TZ=${SYSTEM_TIMEZONE} date +'%F %T'`] system.INFO: Set system timezone \"${SYSTEM_TIMEZONE%% }\"\n"
+    echo ${SYSTEM_TIMEZONE} > /etc/timezone
+    ln -snf /usr/share/zoneinfo/${SYSTEM_TIMEZONE} /etc/localtime
+    dpkg-reconfigure -f noninteractive tzdata &> /dev/null
+fi
+
+#################
+# Php - Version #
+#################
+
+PHP_VERSION_CURRENT=$(update-alternatives --query php | grep -oP "Value: /usr/bin/php\K(.*)")
+
+if [ ${PHP_VERSION} != ${PHP_VERSION_CURRENT} ]; then
     printf "[`date +'%F %T'`] system.INFO: Set php version \"${PHP_VERSION}\"\n"
     cat << EOF | update-alternatives --set-selections &> /dev/null
 php         manual  /usr/bin/php${PHP_VERSION}
 phar        manual  /usr/bin/phar${PHP_VERSION}
 phar.phar   manual  /usr/bin/phar.phar${PHP_VERSION}
 EOF
-    sed -ri \
-        -e "s/php-fpm[[:digit:]].[[:digit:]]/php-fpm${PHP_VERSION}/g" \
-        -e "s/php\/[[:digit:]].[[:digit:]]/php\/${PHP_VERSION}/g" \
-        /root/php-fpm
 fi
 
-# Environment
-if [[ ! -z ${ENVIRONMENT} || ! -z ${PHP_ENVIRONMENT} ]]; then
-    PHP_ENVIRONMENT=${PHP_ENVIRONMENT:-${ENVIRONMENT}}
-    printf "[`date +'%F %T'`] system.INFO: Set php environment \"${PHP_ENVIRONMENT}\"\n"
-    mln -d -s "/etc/php/*/*/conf.d/environment.ini.${PHP_ENVIRONMENT}" "/etc/php/#1/#2/conf.d/environment.ini"
+#################
+# Php - Modules #
+#################
+
+PHP_MODULES_DEFAULT_7_1="mbstring json apcu calendar curl phar ftp pdo exif posix xmlwriter fileinfo readline sysvsem opcache sysvshm ctype gettext xml dom simplexml xmlreader xsl apcu_bc tokenizer intl shmop sysvmsg wddx iconv sockets"
+PHP_MODULES_DEFAULT_7_2="mbstring json apcu calendar curl phar ftp pdo exif posix xmlwriter fileinfo readline sysvsem opcache sysvshm ctype gettext xml dom simplexml xmlreader xsl apcu_bc tokenizer intl shmop sysvmsg wddx iconv sockets"
+
+# Concatenate default & extra modules
+eval "PHP_MODULES=\"\${PHP_MODULES_DEFAULT_${PHP_VERSION/./_}} ${PHP_MODULES_EXTRA}\""
+
+# Modules currently enabled
+PHP_MODULES_ENABLED=""
+for PHP_MODULE in $(phpquery -v ${PHP_VERSION} -M | sort | tr '\n' ' ')
+do
+    phpquery -q -v ${PHP_VERSION} -s cli -m ${PHP_MODULE} && \
+        PHP_MODULES_ENABLED+="${PHP_MODULE} "
+done
+
+# Modules to disable
+PHP_MODULES_TO_DISABLE=$(comm -23 <(printf '%s\n' ${PHP_MODULES_ENABLED}) <(printf '%s\n' ${PHP_MODULES} | sort) | tr '\n' ' ')
+if [[ ! -z ${PHP_MODULES_TO_DISABLE} ]]; then
+    printf "[`date +'%F %T'`] system.INFO: Disable php modules \"${PHP_MODULES_TO_DISABLE%% }\"\n"
+    phpdismod -v ${PHP_VERSION} -s ALL ${PHP_MODULES_TO_DISABLE}
 fi
 
-# Modules
-if [[ ! -z ${PHP_MODULES_EXTRA} ]]; then
-    printf "[`date +'%F %T'`] system.INFO: Enable php modules \"${PHP_MODULES_EXTRA}\"\n"
-    phpenmod -v ALL -s ALL ${PHP_MODULES_EXTRA}
+# Modules to enable
+PHP_MODULES_TO_ENABLE=$(comm -13 <(printf '%s\n' ${PHP_MODULES_ENABLED}) <(printf '%s\n' ${PHP_MODULES} | sort) | tr '\n' ' ')
+if [[ ! -z ${PHP_MODULES_TO_ENABLE} ]]; then
+    printf "[`date +'%F %T'`] system.INFO: Enable php modules \"${PHP_MODULES_TO_ENABLE%% }\"\n"
+    phpenmod -v ${PHP_VERSION} -s ALL ${PHP_MODULES_TO_ENABLE}
 fi
 
-# Fpm - Pool - Log Level
-if [[ ! -z ${PHP_FPM_POOL_LOG_LEVEL} ]]; then
-    printf "[`date +'%F %T'`] system.INFO: Set php fpm log level \"${PHP_FPM_POOL_LOG_LEVEL}\"\n"
-    sed -ri "s/^[[:blank:]]*(log_level)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_FPM_POOL_LOG_LEVEL}/" \
-        /etc/php/*/fpm/pool.d/php-fpm.conf
-fi
+#############
+# Templates #
+#############
 
-# Cli - Memory Limit
-if [[ ! -z ${PHP_MEMORY_LIMIT} || ! -z ${PHP_CLI_MEMORY_LIMIT} ]]; then
-    PHP_CLI_MEMORY_LIMIT=${PHP_CLI_MEMORY_LIMIT:-${PHP_MEMORY_LIMIT}}
-    printf "[`date +'%F %T'`] system.INFO: Set php cli memory limit \"${PHP_CLI_MEMORY_LIMIT}\"\n"
-    sed -ri "s/^[[:blank:]]*(memory_limit)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_CLI_MEMORY_LIMIT}/" \
-        /etc/php/*/cli/conf.d/php.ini
-fi
-
-# Fpm - Memory Limit
-if [[ ! -z ${PHP_MEMORY_LIMIT} || ! -z ${PHP_FPM_MEMORY_LIMIT} ]]; then
-    PHP_FPM_MEMORY_LIMIT=${PHP_FPM_MEMORY_LIMIT:-${PHP_MEMORY_LIMIT}}
-    printf "[`date +'%F %T'`] system.INFO: Set php fpm memory limit \"${PHP_FPM_MEMORY_LIMIT}\"\n"
-    sed -ri "s/^[[:blank:]]*(memory_limit)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_FPM_MEMORY_LIMIT}/" \
-        /etc/php/*/fpm/conf.d/php.ini
-fi
-
-# Fpm - Post Max Size
-if [[ ! -z ${PHP_POST_MAX_SIZE} || ! -z ${PHP_FPM_POST_MAX_SIZE} ]]; then
-    PHP_FPM_POST_MAX_SIZE=${PHP_FPM_POST_MAX_SIZE:-${PHP_POST_MAX_SIZE}}
-    printf "[`date +'%F %T'`] system.INFO: Set php fpm post max size \"${PHP_FPM_POST_MAX_SIZE}\"\n"
-    sed -ri "s/^[[:blank:]]*(post_max_size)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_FPM_POST_MAX_SIZE}/" \
-        /etc/php/*/fpm/conf.d/php.ini
-fi
-
-# Fpm - Upload Max Filesize
-if [[ ! -z ${PHP_UPLOAD_MAX_FILESIZE} || ! -z ${PHP_FPM_UPLOAD_MAX_FILESIZE} ]]; then
-    PHP_FPM_UPLOAD_MAX_FILESIZE=${PHP_FPM_UPLOAD_MAX_FILESIZE:-${PHP_UPLOAD_MAX_FILESIZE}}
-    printf "[`date +'%F %T'`] system.INFO: Set php fpm upload max filesize \"${PHP_FPM_UPLOAD_MAX_FILESIZE}\"\n"
-    sed -ri "s/^[[:blank:]]*(upload_max_filesize)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_FPM_UPLOAD_MAX_FILESIZE}/" \
-        /etc/php/*/fpm/conf.d/php.ini
-fi
-
-# Cli - Date Timezone
-if [[ ! -z ${PHP_DATE_TIMEZONE} || ! -z ${PHP_CLI_DATE_TIMEZONE} ]]; then
-    PHP_CLI_DATE_TIMEZONE=${PHP_CLI_DATE_TIMEZONE:-${PHP_DATE_TIMEZONE}}
-    printf "[`date +'%F %T'`] system.INFO: Set php cli date timezone \"${PHP_CLI_DATE_TIMEZONE}\"\n"
-    sed -ri "s/^[[:blank:]]*(date.timezone)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_CLI_DATE_TIMEZONE////\\/}/" \
-        /etc/php/*/cli/conf.d/php.ini
-fi
-
-# Fpm - Date Timezone
-if [[ ! -z ${PHP_DATE_TIMEZONE} || ! -z ${PHP_FPM_DATE_TIMEZONE} ]]; then
-    PHP_FPM_DATE_TIMEZONE=${PHP_FPM_DATE_TIMEZONE:-${PHP_DATE_TIMEZONE}}
-    printf "[`date +'%F %T'`] system.INFO: Set php fpm date timezone \"${PHP_FPM_DATE_TIMEZONE}\"\n"
-    sed -ri "s/^[[:blank:]]*(date.timezone)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_FPM_DATE_TIMEZONE////\\/}/" \
-        /etc/php/*/fpm/conf.d/php.ini
-fi
-
-# Fpm - Xdebug - Remote Port
-if [[ ! -z ${PHP_XDEBUG_REMOTE_PORT} || ! -z ${PHP_FPM_XDEBUG_REMOTE_PORT} ]]; then
-    PHP_FPM_XDEBUG_REMOTE_PORT=${PHP_FPM_XDEBUG_REMOTE_PORT:-${PHP_XDEBUG_REMOTE_PORT}}
-    printf "[`date +'%F %T'`] system.INFO: Set php fpm xdebug remote port \"${PHP_FPM_XDEBUG_REMOTE_PORT}\"\n"
-    sed -ri "s/^[[:blank:]]*(xdebug.remote_port)[[:blank:]]*=[[:blank:]]*.+$/\1 = ${PHP_FPM_XDEBUG_REMOTE_PORT}/" \
-        /etc/php/*/fpm/conf.d/php.ini
-fi
-
-#########
-# Nginx #
-#########
-
-# Environment
-if [[ ! -z ${ENVIRONMENT} || ! -z ${NGINX_ENVIRONMENT} ]]; then
-    NGINX_ENVIRONMENT=${NGINX_ENVIRONMENT:-${ENVIRONMENT}}
-    printf "[`date +'%F %T'`] system.INFO: Set nginx environment \"${NGINX_ENVIRONMENT}\"\n"
-    mln -d -s "/etc/nginx/app/*.conf.${NGINX_ENVIRONMENT}" "/etc/nginx/app/#1.conf"
-    mln -d -s "/etc/nginx/conf.d/*.${NGINX_ENVIRONMENT}" "/etc/nginx/conf.d/#1"
-fi
-
-# Set Real Ip From
-if [[ ! -z ${NGINX_SET_REAL_IP_FROM} ]]; then
-    printf "[`date +'%F %T'`] system.INFO: Set nginx real ip from \"${NGINX_SET_REAL_IP_FROM}\"\n"
-    sed -ri "s/^[[:blank:]]*(set_real_ip_from)[[:blank:]]+.+;$/\1 ${NGINX_SET_REAL_IP_FROM////\\/};/" \
-        /etc/nginx/conf.d/http.*
-fi
-
-# Client Max Body Size
-if [[ ! -z ${NGINX_CLIENT_MAX_BODY_SIZE} ]]; then
-    printf "[`date +'%F %T'`] system.INFO: Set nginx client max body size \"${NGINX_CLIENT_MAX_BODY_SIZE}\"\n"
-    sed -ri "s/^[[:blank:]]*(client_max_body_size)[[:blank:]]+.+;$/\1 ${NGINX_CLIENT_MAX_BODY_SIZE};/" \
-        /etc/nginx/conf.d/http.*
-fi
+gomplate \
+    --file /etc/supervisor/app.conf.tpl                        --out /etc/supervisor/app.conf \
+    --file /etc/nginx/app.conf.tpl                             --out /etc/nginx/app.conf \
+    --file /root/php-fpm.tpl                                   --out /root/php-fpm \
+    --file /etc/php/${PHP_VERSION}/cli/conf.d/php.ini.tpl      --out /etc/php/${PHP_VERSION}/cli/conf.d/php.ini \
+    --file /etc/php/${PHP_VERSION}/fpm/conf.d/php.ini.tpl      --out /etc/php/${PHP_VERSION}/fpm/conf.d/php.ini \
+    --file /etc/php/${PHP_VERSION}/fpm/pool.d/php-fpm.conf.tpl --out /etc/php/${PHP_VERSION}/fpm/pool.d/php-fpm.conf \
