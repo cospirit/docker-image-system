@@ -11,6 +11,7 @@ RUN \
         apt-utils \
         gnupg \
         curl \
+        python-setuptools \
     " \
     # Disable irrelevants apt-key warnings
     && export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="1" \
@@ -24,7 +25,6 @@ RUN \
         procps \
         ca-certificates \
         sudo \
-        supervisor \
         make \
         git \
         unzip \
@@ -45,6 +45,14 @@ RUN \
     && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v3.0.0/gomplate_linux-amd64 \
         -o /usr/local/bin/gomplate \
     && chown root:root /usr/local/bin/gomplate && chmod +x /usr/local/bin/gomplate \
+    \
+    ##############
+    # Supervisor #
+    ##############
+    \
+    && apt-get install -y --no-install-recommends \
+        python-pkg-resources \
+    && easy_install supervisor==3.3.4 \
     \
     #########
     # Nginx #

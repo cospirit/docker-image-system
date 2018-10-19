@@ -57,6 +57,10 @@ realpath_cache_ttl = 600
 ; Resource Limits ;
 ;;;;;;;;;;;;;;;;;;;
 
+; Maximum execution time of each script, in seconds
+; Note: This directive is hardcoded to 0 for the CLI SAPI
+max_execution_time = {{ getenv "PHP_FPM_MAX_EXECUTION_TIME" "30" }}
+
 ; Maximum amount of memory a script may consume.
 memory_limit = {{ getenv "PHP_FPM_MEMORY_LIMIT" (getenv "PHP_MEMORY_LIMIT" "128M") }}
 
@@ -73,7 +77,6 @@ post_max_size = {{ getenv "PHP_FPM_POST_MAX_SIZE" (getenv "PHP_POST_MAX_SIZE" "8
 
 ; Maximum allowed size for uploaded files.
 upload_max_filesize = {{ getenv "PHP_FPM_UPLOAD_MAX_FILESIZE" (getenv "PHP_UPLOAD_MAX_FILESIZE" "2M") }}
-
 
 ;;;;;;;;;;;;;;;;;;;
 ; Module Settings ;

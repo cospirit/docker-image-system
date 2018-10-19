@@ -13,7 +13,6 @@ export GOSS_VARS=vars.default.yaml
 
 ${DIR}/../dgoss run \
     ardeveloppement/system \
-    sleep infinity \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [Custom]\n\n"
@@ -23,7 +22,6 @@ export GOSS_VARS=vars.yaml
 ${DIR}/../dgoss run \
     --env SYSTEM_TIMEZONE=Europe/Paris \
     ardeveloppement/system \
-    sleep infinity \
     || ((RETURN++))
 
 exit ${RETURN}

@@ -2,4 +2,4 @@
 
 header("Content-Type: text/plain");
 
-echo 'date.timezone: ' . ini_get('date.timezone') . "\n";
+echo 'memory_limit: ' . ini_get('memory_limit') . "\n";

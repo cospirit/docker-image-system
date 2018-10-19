@@ -3,4 +3,4 @@ http:
   http://localhost:
     status: 200
     body:
-      - '/^date.timezone: {{ .Vars.date.timezone }}$/'
+      - '/^memory_limit: {{ .Vars.memory_limit }}$/'

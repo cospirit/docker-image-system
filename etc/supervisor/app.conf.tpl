@@ -1,5 +1,5 @@
 [include]
-files = supervisord.conf
+files = supervisord.conf watchdog.conf
 
 [program:nginx]
 command = nginx -c /etc/nginx/app.conf

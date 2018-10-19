@@ -12,9 +12,9 @@ printf "\n\033[36mTEST\033[0m [Default]\n\n"
 export GOSS_VARS=vars.default.yaml
 
 ${DIR}/../dgoss run \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [7.1]\n\n"
@@ -23,9 +23,9 @@ export GOSS_VARS=vars.7.1.yaml
 
 ${DIR}/../dgoss run \
     --env PHP_VERSION=7.1 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [7.2]\n\n"
@@ -34,9 +34,9 @@ export GOSS_VARS=vars.7.2.yaml
 
 ${DIR}/../dgoss run \
     --env PHP_VERSION=7.2 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 exit ${RETURN}

@@ -6,5 +6,4 @@ export GOSS_PATH=${DIR}/../goss-linux-amd64
 export GOSS_FILES_PATH=${DIR}
 
 ${DIR}/../dgoss edit \
-    ardeveloppement/system \
-    sleep infinity
+    ardeveloppement/system

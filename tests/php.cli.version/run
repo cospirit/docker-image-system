@@ -13,7 +13,6 @@ export GOSS_VARS=vars.default.yaml
 
 ${DIR}/../dgoss run \
     ardeveloppement/system \
-    sleep infinity \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [7.1]\n\n"
@@ -23,7 +22,6 @@ export GOSS_VARS=vars.7.1.yaml
 ${DIR}/../dgoss run \
     --env PHP_VERSION=7.1 \
     ardeveloppement/system \
-    sleep infinity \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [7.2]\n\n"
@@ -33,7 +31,6 @@ export GOSS_VARS=vars.7.2.yaml
 ${DIR}/../dgoss run \
     --env PHP_VERSION=7.2 \
     ardeveloppement/system \
-    sleep infinity \
     || ((RETURN++))
 
 exit ${RETURN}
