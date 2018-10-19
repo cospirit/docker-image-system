@@ -12,27 +12,27 @@ printf "\n\033[36mTEST\033[0m [Default]\n\n"
 export GOSS_VARS=vars.default.yaml
 
 ${DIR}/../dgoss run \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [Default - Php 7.1]\n\n"
 
 ${DIR}/../dgoss run \
     --env PHP_VERSION=7.1 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [Default - Php 7.2]\n\n"
 
 ${DIR}/../dgoss run \
     --env PHP_VERSION=7.2 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [Custom]\n\n"
@@ -40,53 +40,53 @@ printf "\n\033[36mTEST\033[0m [Custom]\n\n"
 export GOSS_VARS=vars.yaml
 
 ${DIR}/../dgoss run \
-    --env PHP_DATE_TIMEZONE=Europe/Paris \
+    --env PHP_MEMORY_LIMIT=123M \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 ${DIR}/../dgoss run \
-    --env PHP_FPM_DATE_TIMEZONE=Europe/Paris \
+    --env PHP_FPM_MEMORY_LIMIT=123M \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [Custom - Php 7.1]\n\n"
 
 ${DIR}/../dgoss run \
-    --env PHP_DATE_TIMEZONE=Europe/Paris \
+    --env PHP_MEMORY_LIMIT=123M \
     --env PHP_VERSION=7.1 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 ${DIR}/../dgoss run \
-    --env PHP_FPM_DATE_TIMEZONE=Europe/Paris \
+    --env PHP_FPM_MEMORY_LIMIT=123M \
     --env PHP_VERSION=7.1 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [Custom - Php 7.2]\n\n"
 
 ${DIR}/../dgoss run \
-    --env PHP_DATE_TIMEZONE=Europe/Paris \
+    --env PHP_MEMORY_LIMIT=123M \
     --env PHP_VERSION=7.2 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 ${DIR}/../dgoss run \
-    --env PHP_FPM_DATE_TIMEZONE=Europe/Paris \
+    --env PHP_FPM_MEMORY_LIMIT=123M \
     --env PHP_VERSION=7.2 \
+    --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
-    supervisord --configuration /etc/supervisor/app/php.conf \
     || ((RETURN++))
 
 exit ${RETURN}

@@ -28,10 +28,6 @@ http {
 
     access_log /dev/stdout main;
 
-{{- if getenv "NGINX_CLIENT_MAX_BODY_SIZE" }}
-    client_max_body_size {{ getenv "NGINX_CLIENT_MAX_BODY_SIZE" }};
-{{- end }}
-
 {{- if getenv "NGINX_REAL_IP_HEADER" }}
     real_ip_header {{ getenv "NGINX_REAL_IP_HEADER" }};
 {{- end }}
@@ -43,6 +39,16 @@ http {
 
 {{- if getenv "NGINX_FASTCGI_BUFFERS" }}
     fastcgi_buffers {{ getenv "NGINX_FASTCGI_BUFFERS" }};
+{{- end }}
+{{- if getenv "NGINX_FASTCGI_MAX_TEMP_FILE_SIZE" }}
+    fastcgi_max_temp_file_size {{ getenv "NGINX_FASTCGI_MAX_TEMP_FILE_SIZE" }};
+{{- end }}
+{{- if getenv "NGINX_FASTCGI_READ_TIMEOUT" }}
+    fastcgi_read_timeout {{ getenv "NGINX_FASTCGI_READ_TIMEOUT" }};
+{{- end }}
+
+{{- if getenv "NGINX_CLIENT_MAX_BODY_SIZE" }}
+    client_max_body_size {{ getenv "NGINX_CLIENT_MAX_BODY_SIZE" }};
 {{- end }}
 
     include mime.types;
@@ -128,9 +134,14 @@ http {
         
         root /srv/app/dist;
 
+        location / {
+            try_files $uri $uri/ /index.html =404;
+        }
+
 {{- end }}
 
         include app_gzip;
+        include app_error;
 
         # Prevents access to other php files
         location ~ \.php$ {
@@ -153,8 +164,9 @@ http {
 
         access_log off;
 
-        error_page 404 /404.html;
-        error_page 500 502 503 504 /50x.html;
+        location / {
+            return 404;
+        }
 
         location = /ping {
 {{- if has (slice "php" "silex" "symfony_2" "symfony_4") (getenv "APP") }}
@@ -178,5 +190,11 @@ http {
             fastcgi_param SCRIPT_FILENAME /status;
         }
 {{- end }}
+
+        error_page 404 @error;
+
+        location @error {
+            try_files /error/$status.html /error/error.html =520;
+        }
     }
 }

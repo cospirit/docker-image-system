@@ -11,7 +11,6 @@ ${DIR}/../dgoss run \
     --env FOO=bar \
     --mount type=bind,source=${DIR}/fixtures/entrypoint.d,target=/home/app/entrypoint.d \
     ardeveloppement/system \
-    sleep infinity \
     || ((RETURN++))
 
 exit ${RETURN}

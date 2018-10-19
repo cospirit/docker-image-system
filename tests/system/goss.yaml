@@ -6,6 +6,8 @@ package:
     installed: false
   curl:
     installed: false
+  python-setuptools:
+    installed: false
   # Packages
   apt-transport-https:
     installed: true
@@ -64,9 +66,16 @@ command:
     exit-status: 0
     stdout:
       - /^VIM - Vi IMproved/
-  # Mln
-  which mln:
+  # Less
+  less --version:
     exit-status: 0
+    stdout:
+      - /^less/
+  # Ps
+  ps --version:
+    exit-status: 0
+    stdout:
+      - /^ps/
   # Sudo
   sudo --version:
     exit-status: 0
