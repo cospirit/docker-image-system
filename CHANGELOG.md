@@ -1,0 +1,41 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.2.0] - 2018-10-30
+### Added
+- From debian stretch (slim)
+- Disable irrelevants apt-key warnings
+- Disable all debian user interaction
+- Vim (Debian package)
+- Less (Debian package)
+- Procps (Debian package)
+- Sudo (Debian package)
+- Make (Debian package)
+- Git (Debian package)
+- Unzip (Debian package)
+- User "app" (Uid 1000) / Group "app" (Gid 1000)
+- User "app" passwordless sudoer
+- Disable sudo env resetting
+- Gosu 1.10
+- Gomplate 3.0.0
+- Supervisor 3.3.4
+- Nginx 1.14.0
+- Node 8.12.0
+- Yarn 1.9.4
+- Php 7.1.23 (cli/fpm)
+- Php 7.2.11 (cli/fpm)
+- Php Extension - Json
+- Php Extension - OPcache
+- Php Extension - Readline
+- Php Extension - Curl
+- Php Extension - Xml
+- Php Extension - Mbstring
+- Php Extension - Intl
+- Php Extension - APCu
+- Php Extension - MySQL
+- Composer 1.7.2
