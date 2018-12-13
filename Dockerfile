@@ -42,7 +42,7 @@ RUN \
         -o /usr/local/bin/gosu \
     && chown root:root /usr/local/bin/gosu && chmod +x /usr/local/bin/gosu \
     # Gomplate
-    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v3.0.0/gomplate_linux-amd64 \
+    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v3.1.0/gomplate_linux-amd64 \
         -o /usr/local/bin/gomplate \
     && chown root:root /usr/local/bin/gomplate && chmod +x /usr/local/bin/gomplate \
     \

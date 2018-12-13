@@ -110,7 +110,7 @@ command:
   gomplate --version:
     exit-status: 0
     stdout:
-      - /^gomplate version 3.0.0$/
+      - /^gomplate version 3.1.0$/
   # Passwordless sudoer
   su app -c "sudo whoami":
     exit-status: 0
