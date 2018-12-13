@@ -58,3 +58,6 @@ Default value: *5*
 
 * **PHP_FPM_POOL_PM_START_SERVERS**: define `pm.start_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
 Default value: *2*
+
+* **PHP_FPM_POOL_PM_MIN_SPARE_SERVERS**: define `pm.min_spare_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
+Default value: *2*
