@@ -21,12 +21,22 @@ tag:
 	docker tag \
 		$(IMAGE) \
 		$(IMAGE):$(VERSION)
+	docker tag \
+		$(IMAGE) \
+		$(IMAGE):$(call semver_major_minor,$(VERSION))
+	docker tag \
+		$(IMAGE) \
+		$(IMAGE):$(call semver_major,$(VERSION))
 
 ## Push image tag into repository (VERSION)
 push:
 	$(call confirm, Confirm pushing of image $(COLOR_COMMENT)$(IMAGE):$(VERSION))
 	docker push \
 		$(IMAGE):$(VERSION)
+	docker push \
+		$(IMAGE):$(call semver_major_minor,$(VERSION))
+	docker push \
+		$(IMAGE):$(call semver_major,$(VERSION))
 
 ## Run temporary image's container (APP,ENVIRONMENT,PHP_VERSION)
 run:

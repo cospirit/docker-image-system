@@ -123,6 +123,74 @@ define confirm
 endef
 
 ########
+# List #
+########
+
+# Splits a string into a list separated by spaces at the split character in the first argument
+# Usage:
+#   $(call list_split,:,foo:bar) = foo bar
+
+define list_split
+$(strip $(subst $(1), ,$(2)))
+endef
+
+# Returns the first element of a list
+# Usage:
+#   $(call list_first,foo bar) = foo
+
+define list_first
+$(firstword $(1))
+endef
+
+# Returns the last element of a list
+# Usage:
+#   $(call list_last,foo bar) = bar
+
+define list_last
+$(lastword $(1))
+endef
+
+# Returns the list with the first element removed
+# Usage:
+#   $(call list_rest,foo bar baz) = bar baz
+
+define list_rest
+$(wordlist 2,$(words $(1)),$(1))
+endef
+
+##########
+# Semver #
+##########
+
+# Usage:
+#   $(call semver_major,3.2.1) = 3
+
+define semver_major
+$(call list_first,$(call list_split,.,$(1)))
+endef
+
+# Usage:
+#   $(call semver_minor,3.2.1) = 2
+
+define semver_minor
+$(call list_first,$(call list_rest,$(call list_split,.,$(1))))
+endef
+
+# Usage:
+#   $(call semver_major_minor,3.2.1) = 3.2
+
+define semver_major_minor
+$(call semver_major,$(1)).$(call semver_minor,$(1))
+endef
+
+# Usage:
+#   $(call semver_patch,3.2.1) = 1
+
+define semver_patch
+$(call list_last,$(call list_split,.,$(1)))
+endef
+
+########
 # Exit #
 ########
 

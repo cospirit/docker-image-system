@@ -1,5 +1,16 @@
 # Docker Image - System
 
+## Versioning
+
+This image follows a pseudo semver versioning, where 3 tags are published for each version, one `major`, one `major.minor` and one `major.minior.patch`.
+
+For instance, pushing a `1.2.3` version, the following tags are available:
+* `1`
+* `1.2`
+* `1.2.3`
+
+This way, an application could reliabily be based on tag `1`, with the semver insurance that no breaking changes will be introduced during its all lifetime.
+
 ## Testing
 
 Note: tests run locally, using [Goss](https://goss.rocks), and `latest`docker image tag
