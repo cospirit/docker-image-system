@@ -35,7 +35,7 @@ help:
 		if (helpMessage) { \
 			helpCommand = substr($$1, 0, index($$1, ":")); \
 			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
-			printf "\n$(COLOR_INFO)%-$(HELP_INDENT)s$(COLOR_RESET) %s", helpCommand, helpMessage; \
+			printf "\n  $(COLOR_INFO)%-$(HELP_INDENT)s$(COLOR_RESET) %s", helpCommand, helpMessage; \
 		} \
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)

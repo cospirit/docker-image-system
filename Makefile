@@ -2,6 +2,7 @@
 
 include Makefile.mk
 
+HELP       += $(call help_section,Image)
 HELP_INDENT = 26
 
 IMAGE   := ardeveloppement/system
@@ -16,6 +17,7 @@ build:
 
 ## Tag image (VERSION)
 tag:
+	$(call message, Tag image $(COLOR_COMMENT)$(IMAGE):$(VERSION))
 	docker tag \
 		$(IMAGE) \
 		$(IMAGE):$(VERSION)
