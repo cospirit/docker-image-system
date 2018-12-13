@@ -105,7 +105,7 @@ command:
   gosu:
     exit-status: 1
     stderr:
-      - '/^gosu version: 1.10/'
+      - '/^gosu version: 1.11/'
   # Gomplate
   gomplate --version:
     exit-status: 0
