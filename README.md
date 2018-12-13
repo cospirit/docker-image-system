@@ -52,3 +52,6 @@ Available values:
 * **PHP_MODULES_EXTRA**: define extra php modules to load. Be careful of some subtleties, where some modules have hidden dependencies:
     * mysqlnd: *mysqlnd pdo_mysql*
     * redis: *redis igbinary*
+
+* **PHP_FPM_POOL_PM_MAX_CHILDREN**: define `pm.max_children` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
+Default value: *5*
