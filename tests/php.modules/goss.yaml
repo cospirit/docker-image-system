@@ -1,0 +1,15 @@
+command:
+  # Defaults
+{{ range .Vars.enabled }}
+  phpquery -q -v ${PHP_VERSION} -s cli -m {{ . }}:
+    exit-status: 0
+  phpquery -q -v ${PHP_VERSION} -s fpm -m {{ . }}:
+    exit-status: 0
+{{ end }}
+  # Extra
+{{ range .Vars.disabled }}
+  phpquery -q -v ${PHP_VERSION} -s cli -m {{ . }}:
+    exit-status: 32
+  phpquery -q -v ${PHP_VERSION} -s fpm -m {{ . }}:
+    exit-status: 32
+{{ end }}
