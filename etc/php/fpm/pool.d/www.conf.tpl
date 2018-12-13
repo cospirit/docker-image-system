@@ -14,6 +14,9 @@ pm = dynamic
 ; maximum number of child processes when pm is set to 'dynamic' or 'ondemand'
 pm.max_children = {{ getenv "PHP_FPM_POOL_PM_MAX_CHILDREN" "5" }}
 
+; The number of child processes created on startup.
+pm.start_servers = {{ getenv "PHP_FPM_POOL_PM_START_SERVERS" "2" }}
+
 ; The desired minimum number of idle server processes
 pm.min_spare_servers = 1
 
