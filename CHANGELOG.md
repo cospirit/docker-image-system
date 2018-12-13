@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Php 7.3.0
 - Php Extension - Redis
+- Environment variable "PHP_FPM_POOL_PM_MAX_CHILDREN"
 
 ## [0.2.0] - 2018-10-30
 ### Added
