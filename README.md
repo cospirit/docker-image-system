@@ -55,3 +55,6 @@ Available values:
 
 * **PHP_FPM_POOL_PM_MAX_CHILDREN**: define `pm.max_children` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
 Default value: *5*
+
+* **PHP_FPM_POOL_PM_START_SERVERS**: define `pm.start_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
+Default value: *2*
