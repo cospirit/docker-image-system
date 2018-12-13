@@ -1,5 +1,16 @@
 # Docker Image - System
 
+## Development workflow
+
+1. Do your job :)
+2. Update CHANGELOG.md
+3. Update README.md if necessary
+4. Increment `VERSION` file following semver paradigm
+5. Build: `make build` (image will be locally tagged `latest`)
+6. Add & run tests
+7. Tag: `make tag`
+8. Push: `make push`
+
 ## Versioning
 
 This image follows a pseudo semver versioning, where 3 tags are published for each version, one `major`, one `major.minor` and one `major.minior.patch`.
