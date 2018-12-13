@@ -18,7 +18,7 @@ pm.max_children = {{ getenv "PHP_FPM_POOL_PM_MAX_CHILDREN" "5" }}
 pm.start_servers = {{ getenv "PHP_FPM_POOL_PM_START_SERVERS" "2" }}
 
 ; The desired minimum number of idle server processes
-pm.min_spare_servers = 1
+pm.min_spare_servers = {{ getenv "PHP_FPM_POOL_PM_MIN_SPARE_SERVERS" "1" }}
 
 ; The desired maximum number of idle server processes
 pm.max_spare_servers = 3
