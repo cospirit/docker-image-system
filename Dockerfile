@@ -38,7 +38,7 @@ RUN \
     # Entrypoint directory
     && mkdir -p /home/app/entrypoint.d && chown app:app /home/app/entrypoint.d \
     # Gosu
-    && curl -sSL https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 \
+    && curl -sSL https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 \
         -o /usr/local/bin/gosu \
     && chown root:root /usr/local/bin/gosu && chmod +x /usr/local/bin/gosu \
     # Gomplate
