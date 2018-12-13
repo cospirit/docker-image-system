@@ -29,6 +29,13 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
+printf "\n\033[36mTEST\033[0m [Default - Php 7.3]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.3 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
 printf "\n\033[36mTEST\033[0m [Development]\n\n"
 
 export GOSS_VARS=vars.development.yaml
@@ -54,6 +61,14 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
+printf "\n\033[36mTEST\033[0m [Development - Php 7.3]\n\n"
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=development \
+    --env PHP_VERSION=7.3 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
 printf "\n\033[36mTEST\033[0m [Production]\n\n"
 
 export GOSS_VARS=vars.production.yaml
@@ -76,6 +91,14 @@ printf "\n\033[36mTEST\033[0m [Production - Php 7.2]\n\n"
 ${DIR}/../dgoss run \
     --env ENVIRONMENT=production \
     --env PHP_VERSION=7.2 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Production - Php 7.3]\n\n"
+
+${DIR}/../dgoss run \
+    --env ENVIRONMENT=production \
+    --env PHP_VERSION=7.3 \
     ardeveloppement/system \
     || ((RETURN++))
 
