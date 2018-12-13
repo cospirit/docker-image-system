@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update Gosu 1.11
 - Update Gotemplate 3.1.0
+- Update Nginx 1.14.2
+- Update Node 8.14.0
+- Update Yarn 1.12.3
+- Update Php 7.1.25
+- Update Php 7.2.13
 
 ## [0.2.0] - 2018-10-30
 ### Added
