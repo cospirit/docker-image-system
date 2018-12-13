@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment variable "PHP_FPM_POOL_PM_MAX_CHILDREN"
 - Environment variable "PHP_FPM_POOL_PM_START_SERVERS"
 - Environment variable "PHP_FPM_POOL_PM_MIN_SPARE_SERVERS"
+- Environment variable "PHP_FPM_POOL_PM_MAX_SPARE_SERVERS"
 
 ## [0.2.0] - 2018-10-30
 ### Added
