@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Yarn 1.12.3
 - Update Php 7.1.25
 - Update Php 7.2.13
+- Default Php version to 7.3
+
+### Added
+- Php 7.3.0
 
 ## [0.2.0] - 2018-10-30
 ### Added
