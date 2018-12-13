@@ -1,0 +1,10 @@
+enabled:
+  - mysqlnd
+  - pdo_mysql
+
+disabled:
+  - xdebug
+  - igbinary
+  - redis
+  - zip
+  - mysqli
