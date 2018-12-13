@@ -60,4 +60,7 @@ Default value: *5*
 Default value: *2*
 
 * **PHP_FPM_POOL_PM_MIN_SPARE_SERVERS**: define `pm.min_spare_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
-Default value: *2*
+Default value: *1*
+
+* **PHP_FPM_POOL_PM_MAX_SPARE_SERVERS**: define `pm.max_spare_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
+Default value: *3*

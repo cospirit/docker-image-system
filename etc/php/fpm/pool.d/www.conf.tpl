@@ -21,7 +21,7 @@ pm.start_servers = {{ getenv "PHP_FPM_POOL_PM_START_SERVERS" "2" }}
 pm.min_spare_servers = {{ getenv "PHP_FPM_POOL_PM_MIN_SPARE_SERVERS" "1" }}
 
 ; The desired maximum number of idle server processes
-pm.max_spare_servers = 3
+pm.max_spare_servers = {{ getenv "PHP_FPM_POOL_PM_MAX_SPARE_SERVERS" "3" }}
 
 ; The URI to view the FPM status page
 pm.status_path = /status
