@@ -1,0 +1,4 @@
+max_children: 6
+start_servers: 3
+min_spare_servers: 2
+max_spare_servers: 4

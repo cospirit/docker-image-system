@@ -1,0 +1,8 @@
+file:
+  /etc/php/{{ .Env.PHP_VERSION }}/fpm/pool.d/www.conf:
+    exists: true
+    contains:
+      - /^pm.max_children = {{ .Vars.max_children }}$/
+      - /^pm.start_servers = {{ .Vars.start_servers }}$/
+      - /^pm.min_spare_servers = {{ .Vars.min_spare_servers }}$/
+      - /^pm.max_spare_servers = {{ .Vars.max_spare_servers }}$/
