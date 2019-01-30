@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Php 7.1.25
 - Update Php 7.2.13
 - Default Php version to 7.3
-- Composer 1.8.0
+- Update Composer 1.8.0
 - Introduce pseudo semver versionning
 
 ### Added
@@ -62,3 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Php Extension - APCu
 - Php Extension - MySQL
 - Composer 1.7.2
+- Composer plugin hirak/prestissimo 0.3.8
+- Composer plugin sllh/composer-versions-check 2.0.3
+- Composer plugin pyrech/composer-changelogs 1.6.0
