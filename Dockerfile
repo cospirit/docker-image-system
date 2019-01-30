@@ -52,7 +52,7 @@ RUN \
     \
     && apt-get install -y --no-install-recommends \
         python-pkg-resources \
-    && easy_install supervisor==3.3.4 \
+    && easy_install supervisor==3.3.5 \
     \
     #########
     # Nginx #
