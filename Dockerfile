@@ -8,9 +8,6 @@ RUN \
     ##########
     \
     BUILD_PACKAGES=" \
-        apt-utils \
-        gnupg \
-        curl \
         python-setuptools \
     " \
     # Disable irrelevants apt-key warnings
@@ -19,10 +16,14 @@ RUN \
     && export DEBIAN_FRONTEND="noninteractive" \
     && apt-get update \
     && apt-get install -y --no-install-recommends ${BUILD_PACKAGES} \
+        apt-utils \
+        gnupg \
+        dirmngr \
         apt-transport-https \
         vim-tiny \
         less \
         procps \
+        curl \
         ca-certificates \
         sudo \
         make \
