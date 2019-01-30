@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Update Supervisor 3.3.5
+- Update nginx 1.14.2
+- Update Node 8.15.0
+- Update Yarn 1.13.0
+- Update Php 7.1.26
+- Update Php 7.2.14
+- Update Php 7.3.1
+- Update Composer 1.8.3
 - Keep apt packaging packages so that installing packages after build does not raises warnings anymore
 
 ## [1.0.0] - 2018-12-13
