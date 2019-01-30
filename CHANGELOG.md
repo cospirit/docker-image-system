@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Update Supervisor 3.3.5
+- Keep apt packaging packages so that installing packages after build does not raises warnings anymore
 
 ## [1.0.0] - 2018-12-13
 ### Changed
