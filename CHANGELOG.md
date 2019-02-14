@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- System applications versions as building docker environment variables
+
 ## [1.0.1] - 2019-01-30
 ### Changed
 - Update Supervisor 3.3.5

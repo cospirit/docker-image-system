@@ -3,6 +3,13 @@ FROM debian:stretch-slim
 LABEL maintainer="AR Developpement <support-arconnect@cospirit.com>"
 
 RUN \
+    ############
+    # Versions #
+    ############
+    GOSU_VERSION="1.11" \
+    GOMPLATE_VERSION="3.1.0" \
+    SUPERVISOR_VERSION="3.3.5" \
+    NGINX_VERSION="1.14.*" \
     ##########
     # System #
     ##########
@@ -39,11 +46,11 @@ RUN \
     # Entrypoint directory
     && mkdir -p /home/app/entrypoint.d && chown app:app /home/app/entrypoint.d \
     # Gosu
-    && curl -sSL https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 \
+    && curl -sSL https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64 \
         -o /usr/local/bin/gosu \
     && chown root:root /usr/local/bin/gosu && chmod +x /usr/local/bin/gosu \
     # Gomplate
-    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v3.1.0/gomplate_linux-amd64 \
+    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64 \
         -o /usr/local/bin/gomplate \
     && chown root:root /usr/local/bin/gomplate && chmod +x /usr/local/bin/gomplate \
     \
@@ -53,7 +60,7 @@ RUN \
     \
     && apt-get install -y --no-install-recommends \
         python-pkg-resources \
-    && easy_install supervisor==3.3.5 \
+    && easy_install supervisor==${SUPERVISOR_VERSION} \
     \
     #########
     # Nginx #
@@ -64,7 +71,7 @@ RUN \
         | apt-key add - \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
-        nginx=1.14.* \
+        nginx=${NGINX_VERSION} \
     \
     ########
     # Node #
