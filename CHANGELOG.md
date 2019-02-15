@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - System applications versions as building docker environment variables
+- Update Gomplate 3.2.0
 
 ## [1.0.1] - 2019-01-30
 ### Changed
@@ -24,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2018-12-13
 ### Changed
 - Update Gosu 1.11
-- Update Gotemplate 3.1.0
+- Update Gomplate 3.1.0
 - Update Nginx 1.14.2
 - Update Node 8.14.0
 - Update Yarn 1.12.3
