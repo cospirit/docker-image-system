@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Php 7.3.2
 - Update Composer 1.8.4
 
+### Added
+- Environment variable `NGINX_DIRECTIVES`
+
 ## [1.0.1] - 2019-01-30
 ### Changed
 - Update Supervisor 3.3.5
@@ -41,10 +44,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Php 7.3.0
 - Php Extension - Redis
-- Environment variable "PHP_FPM_POOL_PM_MAX_CHILDREN"
-- Environment variable "PHP_FPM_POOL_PM_START_SERVERS"
-- Environment variable "PHP_FPM_POOL_PM_MIN_SPARE_SERVERS"
-- Environment variable "PHP_FPM_POOL_PM_MAX_SPARE_SERVERS"
+- Environment variable `PHP_FPM_POOL_PM_MAX_CHILDREN`
+- Environment variable `PHP_FPM_POOL_PM_START_SERVERS`
+- Environment variable `PHP_FPM_POOL_PM_MIN_SPARE_SERVERS`
+- Environment variable `PHP_FPM_POOL_PM_MAX_SPARE_SERVERS`
 
 ## [0.2.0] - 2018-10-30
 ### Added

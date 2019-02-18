@@ -1,0 +1,6 @@
+presents:
+  - gzip
+  - error
+  - assets
+
+absents: []

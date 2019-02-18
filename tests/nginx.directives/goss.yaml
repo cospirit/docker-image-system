@@ -1,0 +1,10 @@
+file:
+  /etc/nginx/app.conf:
+    exists: true
+    contains:
+{{ range .Vars.presents }}
+      - /^        include directives/{{ . }};$/
+{{ end }}
+{{ range .Vars.absents }}
+      - "!/^        include directives/{{ . }};$/"
+{{ end }}
