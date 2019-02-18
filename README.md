@@ -44,34 +44,49 @@ One can also works interactively on a specific test using (See [DGoss documentat
 
 ## Environment variables
 
-* **APP**: define type of application. Can leverage parameters like launched services or web server public path.
+**APP**: define type of application. Can leverage parameters like launched services or web server public path.
+
 Available values:
-    * angular
-    * html
-    * php
-    * silex
-    * symfony_2
-    * symfony_4
-    * vuejs
+  - `angular`
+  - `html`
+  - `php`
+  - `silex`
+  - `symfony_2`
+  - `symfony_4`
+  - `vuejs`
 
-* **PHP_VERSION**: define php version to use. Plumbering will internally take place to set alternatives, symlinks or paths accordingly:
+**NGINX_DIRECTIVES**: include pre-defined nginx inclusions directives. Must be in json array format.
+
+Default value: `["gzip", "error", "assets"]`
+
 Available values:
-    * 7.1
-    * 7.2
-    * 7.3 *(default)*
+  - `gzip` *handle gzip compression*
+  - `error` *handle errors*
+  - `assets` *handle assets*
 
-* **PHP_MODULES_EXTRA**: define extra php modules to load. Be careful of some subtleties, where some modules have hidden dependencies:
-    * mysqlnd: *mysqlnd pdo_mysql*
-    * redis: *redis igbinary*
+**PHP_VERSION**: define php version to use. Plumbering will internally take place to set alternatives, symlinks or paths accordingly:
 
-* **PHP_FPM_POOL_PM_MAX_CHILDREN**: define `pm.max_children` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
-Default value: *5*
+Available values:
+  - `7.1`
+  - `7.2`
+  - `7.3` *(default)*
 
-* **PHP_FPM_POOL_PM_START_SERVERS**: define `pm.start_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
-Default value: *2*
+**PHP_MODULES_EXTRA**: define extra php modules to load. Be careful of some subtleties, where some modules have hidden dependencies:
+  - `mysqlnd` *mysqlnd pdo_mysql*
+  - `redis` *redis igbinary*
 
-* **PHP_FPM_POOL_PM_MIN_SPARE_SERVERS**: define `pm.min_spare_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
-Default value: *1*
+**PHP_FPM_POOL_PM_MAX_CHILDREN**: define `pm.max_children` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
 
-* **PHP_FPM_POOL_PM_MAX_SPARE_SERVERS**: define `pm.max_spare_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
-Default value: *3*
+Default value: `5`
+
+**PHP_FPM_POOL_PM_START_SERVERS**: define `pm.start_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
+
+Default value: `2`
+
+**PHP_FPM_POOL_PM_MIN_SPARE_SERVERS**: define `pm.min_spare_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
+
+Default value: `1`
+
+**PHP_FPM_POOL_PM_MAX_SPARE_SERVERS**: define `pm.max_spare_servers` php fpm option. See: http://php.net/manual/en/install.fpm.configuration.php
+
+Default value: `3`

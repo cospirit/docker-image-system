@@ -1,0 +1,14 @@
+# Prevents access to other php files
+location ~ \.php$ {
+    return 404;
+}
+
+# Disable assets logs
+location ~* \.(jpg|jpeg|gif|png|svg|css|js|map|ico|ttf|woff|woff2|eot)$ {
+    access_log off;
+}
+
+# Deny all . files
+location ~ /\. {
+    deny all;
+}

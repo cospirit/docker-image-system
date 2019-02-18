@@ -57,19 +57,19 @@ http {
         listen 80;
 
 {{- if eq (getenv "APP") "angular" }}
-        
+
         root /srv/app/dist;
 
         location / {
             try_files $uri $uri/ /index.html =404;
         }
-        
+
 {{- else if eq (getenv "APP") "html" }}
-        
+
         root /srv/app;
 
 {{- else if eq (getenv "APP") "php" }}
-        
+
         root /srv/app;
 
         location / {
@@ -131,7 +131,7 @@ http {
         }
 
 {{- else if eq (getenv "APP") "vuejs" }}
-        
+
         root /srv/app/dist;
 
         location / {
@@ -140,23 +140,9 @@ http {
 
 {{- end }}
 
-        include app_gzip;
-        include app_error;
-
-        # Prevents access to other php files
-        location ~ \.php$ {
-            return 404;
-        }
-
-        # Disable assets logs
-        location ~* \.(jpg|jpeg|gif|png|svg|css|js|map|ico|ttf|woff|woff2|eot)$ {
-            access_log off;
-        }
-
-        # Deny all . files
-        location ~ /\. {
-            deny all;
-        }
+    {{- range (getenv "NGINX_DIRECTIVES" | jsonArray) }}
+        include directives/{{ . }};
+    {{- end }}
     }
 
     server {
