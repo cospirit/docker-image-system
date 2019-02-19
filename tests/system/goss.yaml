@@ -1,14 +1,14 @@
 package:
   # Build packages should not be present
-  apt-utils:
-    installed: false
-  gnupg:
-    installed: false
-  curl:
-    installed: false
   python-setuptools:
     installed: false
   # Packages
+  apt-utils:
+    installed: true
+  gnupg:
+    installed: true
+  dirmngr:
+    installed: true
   apt-transport-https:
     installed: true
   ca-certificates:
@@ -25,7 +25,6 @@ file:
     exists: true
     contains:
       - /^Name:\tsleep$/
-      - /^Umask:\t0022$/
       - /^Uid:\t1000\t1000\t1000\t1000$/
       - /^Gid:\t1000\t1000\t1000\t1000$/
   # Home
@@ -76,6 +75,11 @@ command:
     exit-status: 0
     stdout:
       - /^ps/
+  # Curl
+  curl --version:
+    exit-status: 0
+    stdout:
+      - /^curl/
   # Sudo
   sudo --version:
     exit-status: 0
@@ -110,7 +114,7 @@ command:
   gomplate --version:
     exit-status: 0
     stdout:
-      - /^gomplate version 3.1.0$/
+      - /^gomplate version 3.2.0$/
   # Passwordless sudoer
   su app -c "sudo whoami":
     exit-status: 0
