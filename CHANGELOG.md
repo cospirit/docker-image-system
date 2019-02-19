@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1] - 2019-02-19
 ### Changed
 - System applications versions as building docker environment variables
 - Update Gomplate 3.2.0
