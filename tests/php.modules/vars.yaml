@@ -1,6 +1,7 @@
 enabled:
   - mysqlnd
   - pdo_mysql
+  - pdo_pgsql
 
 disabled:
   - xdebug

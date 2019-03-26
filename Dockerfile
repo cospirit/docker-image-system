@@ -110,6 +110,7 @@ RUN \
         # Modules - Extra
         php7.1-zip php7.2-zip php7.3-zip \
         php7.1-mysql php7.2-mysql php7.3-mysql \
+        php7.1-pgsql php7.2-pgsql php7.3-pgsql \
         php-redis \
         php-xdebug \
     # Composer
