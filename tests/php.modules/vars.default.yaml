@@ -35,6 +35,7 @@ disabled:
   - mysqlnd
   - xdebug
   - pdo_mysql
+  - pdo_pgsql
   - igbinary
   - redis
   - zip
