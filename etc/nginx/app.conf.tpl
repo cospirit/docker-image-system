@@ -89,10 +89,20 @@ http {
             try_files $uri /index.php$is_args$args;
         }
 
+    {{ if eq (getenv "ENVIRONMENT") "development" }}
+        location ~ ^/(index(_[-\w]+)?)\.php(/|$) {
+            include app_php;
+        }
+
+        location ~ ^/index\.php(/|$) {
+            include app_php;
+        }
+    {{- else }}
         location ~ ^/index\.php(/|$) {
             include app_php;
             internal;
         }
+    {{- end }}
 
 {{- else if eq (getenv "APP") "symfony_2" }}
 

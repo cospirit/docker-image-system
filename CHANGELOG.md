@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2] - 2019-03-26
+### Fixed
+- Nginx config for Static service dev environment
+
+### Added
+- Php Extension - PostgreSQL
+
 ## [1.1] - 2019-02-19
 ### Changed
 - System applications versions as building docker environment variables
