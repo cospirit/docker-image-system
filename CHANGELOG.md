@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Update Gomplate 3.5.0
+- Update Supervisor 4.0.3
 
 ## [1.2.0] - 2019-03-26
 ### Fixed
