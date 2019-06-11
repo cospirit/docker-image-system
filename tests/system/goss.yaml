@@ -86,10 +86,10 @@ command:
     stdout:
       - /^Sudo version/
   # Supervisor
-  supervisorctl --help:
+  supervisord --version:
     exit-status: 0
     stdout:
-      - /^supervisorctl -- control applications run by supervisord from the cmd line.$/
+      - /^4.0.3$/
   # Make
   make --version:
     exit-status: 0
