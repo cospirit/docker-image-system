@@ -6,14 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.2] - 2019-03-26
+## [1.2.0] - 2019-03-26
 ### Fixed
 - Nginx config for Static service dev environment
+
+### Changed
+- Update Php 7.1.29
+- Update Php 7.2.18
+- Update Php 7.3.5
+- Update Composer 1.8.5
+- Update Composer plugin hirak/prestissimo 0.3.9
+- Update Node 8.16.0
+- Update Yarn 1.16.0
 
 ### Added
 - Php Extension - PostgreSQL
 
-## [1.1] - 2019-02-19
+## [1.1.0] - 2019-02-19
 ### Changed
 - System applications versions as building docker environment variables
 - Update Gomplate 3.2.0
