@@ -7,7 +7,7 @@ RUN \
     # Versions #
     ############
     GOSU_VERSION="1.11" \
-    GOMPLATE_VERSION="3.2.0" \
+    GOMPLATE_VERSION="3.5.0" \
     SUPERVISOR_VERSION="3.3.5" \
     NGINX_VERSION="1.14.*" \
     ##########
