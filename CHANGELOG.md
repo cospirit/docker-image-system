@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Update Gomplate 3.5.0
 - Update Supervisor 4.0.3
+- Update Php 7.1.30
+- Update Php 7.2.19
+- Update Php 7.3.6
+- Update Composer 1.8.6
 
 ## [1.2.0] - 2019-03-26
 ### Fixed
