@@ -1,45 +1,42 @@
 file:
-  # Docker output
-  /goss/docker_output.log:
-    exists: true
-    contains:
-      - '/^\[.*\] system.INFO: Set group id "1001"$/'
-      - '/^\[.*\] system.INFO: Set user id "1001"$/'
   # Command (sleep) should be run as user
   /proc/1/status:
     exists: true
     contains:
       - /^Name:\tsleep$/
       - /^Umask:\t0022$/
-      - /^Uid:\t1001\t1001\t1001\t1001$/
-      - /^Gid:\t1001\t1001\t1001\t1001$/
+      - /^Uid:\t{{ .Vars.user_id }}\t{{ .Vars.user_id }}\t{{ .Vars.user_id }}\t{{ .Vars.user_id }}$/
+      - /^Gid:\t{{ .Vars.group_id }}\t{{ .Vars.group_id }}\t{{ .Vars.group_id }}\t{{ .Vars.group_id }}$/
   # Home
   /home/app:
     exists: true
     mode: "0755"
     owner: app
-    group: app
     filetype: directory
   # Workdir
   /srv/app:
     exists: true
     mode: "0755"
     owner: app
-    group: app
     filetype: directory
     contains: []
+
+command:
+  # Home
+  stat -c "%g" /home/app:
+    exit-status: 0
+    stdout:
+      - {{ .Vars.group_id }}
+  # Workdir
+  stat -c "%g" /srv/app:
+    exit-status: 0
+    stdout:
+      - {{ .Vars.group_id }}
 
 user:
   app:
     exists: true
-    uid: 1001
-    gid: 1001
-    groups:
-      - app
+    uid: {{ .Vars.user_id }}
+    gid: {{ .Vars.group_id }}
     home: /home/app
     shell: /bin/bash
-
-group:
-  app:
-    exists: true
-    gid: 1001
