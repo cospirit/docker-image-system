@@ -8,9 +8,33 @@ export GOSS_SLEEP=1
 
 RETURN=0
 
+printf "\n\033[36mTEST\033[0m [Default]\n\n"
+
+export GOSS_VARS=vars.default.yaml
+
+${DIR}/../dgoss run \
+    ardeveloppement/system \
+    sleep infinity \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m\n\n"
+
+export GOSS_VARS=vars.yaml
+
 ${DIR}/../dgoss run \
     --env USER_ID=1001 \
     --env GROUP_ID=1001 \
+    ardeveloppement/system \
+    sleep infinity \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Existing]\n\n"
+
+export GOSS_VARS=vars.existing.yaml
+
+${DIR}/../dgoss run \
+    --env USER_ID=501 \
+    --env GROUP_ID=20 \
     ardeveloppement/system \
     sleep infinity \
     || ((RETURN++))

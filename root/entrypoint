@@ -7,8 +7,14 @@ if [[ ! -z ${USER_ID} || ! -z ${GROUP_ID} ]]; then
     GROUP_ID=${GROUP_ID:-1000}
     if [[ ${GROUP_ID} != 1000 ]]; then
         printf "[`date +'%F %T'`] system.INFO: Set group id \"${GROUP_ID}\"\n"
-        groupmod --gid ${GROUP_ID} app
-        chgrp -R app /home/app
+        # Check group already exists
+        GROUP=$(getent group ${GROUP_ID} | cut -d: -f1)
+        if [ ! ${GROUP} ]; then
+            groupmod --gid ${GROUP_ID} app
+            chgrp -R app /home/app
+        else
+            chgrp -R ${GROUP} /home/app
+        fi
     fi
     USER_ID=${USER_ID:-1000}
     if [[ ${USER_ID} != 1000 ]]; then
@@ -16,7 +22,7 @@ if [[ ! -z ${USER_ID} || ! -z ${GROUP_ID} ]]; then
     fi
     if [[ ${USER_ID} != 1000 || ${GROUP_ID} != 1000 ]]; then
         usermod --uid ${USER_ID} --gid ${GROUP_ID} app &> /dev/null
-        chown app:app /srv/app
+        chown ${USER_ID}:${GROUP_ID} /srv/app
     fi
 fi
 

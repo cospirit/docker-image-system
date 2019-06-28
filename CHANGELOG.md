@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.2] - 2019-07-01
+### Fixed
+- Handle correctly existing group when GROUP_ID is specified (especially when
+  using this image on mac osx, where default user id is 502 and default group
+  id is 20, which is an already existing debian system group)
+
 ## [1.2.1] - 2019-06-11
 ### Added
 - Introduce circleci tests
