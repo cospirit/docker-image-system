@@ -15,13 +15,6 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
-printf "\n\033[36mTEST\033[0m [Default - Php 7.1]\n\n"
-
-${DIR}/../dgoss run \
-    --env PHP_VERSION=7.1 \
-    ardeveloppement/system \
-    || ((RETURN++))
-
 printf "\n\033[36mTEST\033[0m [Default - Php 7.2]\n\n"
 
 ${DIR}/../dgoss run \
@@ -47,20 +40,6 @@ ${DIR}/../dgoss run \
 
 ${DIR}/../dgoss run \
     --env PHP_CLI_MEMORY_LIMIT=123M \
-    ardeveloppement/system \
-    || ((RETURN++))
-
-printf "\n\033[36mTEST\033[0m [Custom - Php 7.1]\n\n"
-
-${DIR}/../dgoss run \
-    --env PHP_MEMORY_LIMIT=123M \
-    --env PHP_VERSION=7.1 \
-    ardeveloppement/system \
-    || ((RETURN++))
-
-${DIR}/../dgoss run \
-    --env PHP_CLI_MEMORY_LIMIT=123M \
-    --env PHP_VERSION=7.1 \
     ardeveloppement/system \
     || ((RETURN++))
 
