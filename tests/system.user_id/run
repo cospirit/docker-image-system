@@ -4,7 +4,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 export GOSS_PATH=${DIR}/../goss-linux-amd64
 export GOSS_FILES_PATH=${DIR}
-export GOSS_SLEEP=1
+export GOSS_SLEEP=3
 
 RETURN=0
 
@@ -17,7 +17,7 @@ ${DIR}/../dgoss run \
     sleep infinity \
     || ((RETURN++))
 
-printf "\n\033[36mTEST\033[0m\n\n"
+printf "\n\033[36mTEST\033[0m [Custom]\n\n"
 
 export GOSS_VARS=vars.yaml
 

@@ -23,3 +23,5 @@ ${DIR}/../dgoss run \
     --env NGINX_DIRECTIVES="[\"gzip\", \"error\"]" \
     ardeveloppement/system \
     || ((RETURN++))
+
+exit ${RETURN}
