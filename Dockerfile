@@ -50,7 +50,7 @@ RUN \
         -o /usr/local/bin/gosu \
     && chown root:root /usr/local/bin/gosu && chmod +x /usr/local/bin/gosu \
     # Gomplate
-    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64 \
+    && curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim \
         -o /usr/local/bin/gomplate \
     && chown root:root /usr/local/bin/gomplate && chmod +x /usr/local/bin/gomplate \
     \
@@ -129,7 +129,12 @@ RUN \
     #########
     \
     && apt-get purge -y --auto-remove ${BUILD_PACKAGES} \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf \
+        /var/lib/apt/lists/* \
+        /var/cache/debconf/*-old \
+        /var/lib/dpkg/*-old \
+    && truncate -s 0 /var/log/*.log \
+    && truncate -s 0 /var/log/**/*.log 
 
 ##########
 # Config #
