@@ -85,4 +85,14 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
+printf "\n\033[36mTEST\033[0m [Nuxt]\n\n"
+
+export GOSS_VARS=vars.nuxt.yaml
+
+${DIR}/../dgoss run \
+    --env APP=nuxt \
+    --mount type=bind,source=${DIR}/fixtures/nuxt,target=/srv/app \
+    ardeveloppement/system \
+    || ((RETURN++))
+
 exit ${RETURN}

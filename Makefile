@@ -80,6 +80,10 @@ run/symfony_4: run
 run/vuejs: APP = vuejs
 run/vuejs: run
 
+## Run temporary image's container / Nuxt (ENVIRONMENT)
+run/nuxt: APP = nuxt
+run/nuxt: run
+
 ## Shell into temporary image's container
 sh:
 	docker exec \
