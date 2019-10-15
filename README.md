@@ -57,6 +57,7 @@ Available values:
   - `symfony_2`
   - `symfony_4`
   - `vuejs`
+  - `nuxt`
 
 **NGINX_DIRECTIVES**: include pre-defined nginx inclusions directives. Must be in json array format.
 

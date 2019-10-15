@@ -162,7 +162,7 @@ http {
             proxy_connect_timeout       1m;
             proxy_pass                          http://127.0.0.1:3000; # mettre l'URL de l'instance Node.js ici
         }
-        location ~* \.(jpe?g|png|gif|ico)$ {
+        location ~* \.(jpe?g|png|gif|ico|json)$ {
             root /srv/app/static;
             try_files $uri $uri/ /index.html;
         }

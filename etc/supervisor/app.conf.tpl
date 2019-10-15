@@ -21,3 +21,15 @@ stdout_logfile_maxbytes = 0
 stderr_logfile = /dev/stderr
 stderr_logfile_maxbytes = 0
 {{- end }}
+
+{{- if (and (eq (getenv "APP") "nuxt") (eq (getenv "ENVIRONMENT") "production"))}}
+[program:nuxt]
+directory=/srv/app/
+command=nuxt-start
+autostart=true
+autorestart=true
+stderr_logfile = /dev/stderr
+stdout_logfile = /dev/stdout
+stdout_logfile_maxbytes = 0
+stderr_logfile_maxbytes = 0
+{{- end }}
