@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.2.3] - 2019-10-15
+## [1.3.0] - 2019-10-15
 ### Added
 - Handle Nuxt application
     - Add nginx configuration
     - Add `nuxt-start` in supervisor
+- Update Php 7.2.23
+- Update Php 7.3.10
+- Update Yarn 1.19.1
+- Update NodeJS 8.16.2
 
 ## [1.2.2] - 2019-07-01
 ### Fixed
