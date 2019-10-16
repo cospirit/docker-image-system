@@ -18,12 +18,10 @@ http:
       - '/^pool: /'
       - '/^process manager: /'
 {{ end }}
-{{ if (not (eq (or .Vars.app "") "nuxt"))}}
   # App
   http://localhost:
     status: 200
-  {{ if .Vars.app }}
+{{ if .Vars.app }}
     body:
       - '/^app: {{ .Vars.app }}$/'
-  {{ end }}
 {{ end }}
