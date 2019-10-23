@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Handle Nuxt application
     - Add nginx configuration
     - Add `nuxt-start` in supervisor
+### Changed
 - Update Php 7.2.23
 - Update Php 7.3.10
 - Update Yarn 1.19.1
