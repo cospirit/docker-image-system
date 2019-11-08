@@ -38,7 +38,7 @@ ping.path = /ping
 ; Redirect worker stdout and stderr into main error log
 catch_workers_output = yes
 
-{{- if not (has (slice "7.2") (getenv "PHP_VERSION")) }}
+{{- if not (has (slice "7.1" "7.2") (getenv "PHP_VERSION")) }}
 
 ; Decorate worker output with prefix and suffix
 decorate_workers_output = no

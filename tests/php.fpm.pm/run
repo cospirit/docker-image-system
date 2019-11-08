@@ -16,6 +16,14 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
+printf "\n\033[36mTEST\033[0m [Default - Php 7.1]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.1 \
+    --env APP=php \
+    ardeveloppement/system \
+    || ((RETURN++))
+
 printf "\n\033[36mTEST\033[0m [Default - Php 7.2]\n\n"
 
 ${DIR}/../dgoss run \
@@ -41,6 +49,18 @@ ${DIR}/../dgoss run \
     --env PHP_FPM_POOL_PM_START_SERVERS=3 \
     --env PHP_FPM_POOL_PM_MIN_SPARE_SERVERS=2 \
     --env PHP_FPM_POOL_PM_MAX_SPARE_SERVERS=4 \
+    --env APP=php \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Custom - Php 7.1]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_FPM_POOL_PM_MAX_CHILDREN=6 \
+    --env PHP_FPM_POOL_PM_START_SERVERS=3 \
+    --env PHP_FPM_POOL_PM_MIN_SPARE_SERVERS=2 \
+    --env PHP_FPM_POOL_PM_MAX_SPARE_SERVERS=4 \
+    --env PHP_VERSION=7.1 \
     --env APP=php \
     ardeveloppement/system \
     || ((RETURN++))

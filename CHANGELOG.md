@@ -6,11 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2019-11-08
+### Added
+- Php 7.1.33 (cli/fpm)
+
+### Changed
+- Update Php 7.2.24
+- Update Php 7.3.11
+- Update Composer 1.9.1
+- Update Composer plugin pyrech/composer-changelogs v1.7.0
+
 ## [1.3.0] - 2019-10-15
 ### Added
 - Handle Nuxt application
     - Add nginx configuration
     - Add `nuxt-start` in supervisor
+    
 ### Changed
 - Update Php 7.2.23
 - Update Php 7.3.10
