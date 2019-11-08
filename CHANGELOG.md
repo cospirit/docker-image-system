@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.4] - 2019-11-08
+## [1.4.0] - 2019-11-08
 ### Added
 - Php 7.1.33 (cli/fpm)
 
