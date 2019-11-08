@@ -71,6 +71,7 @@ Available values:
 **PHP_VERSION**: define php version to use. Plumbering will internally take place to set alternatives, symlinks or paths accordingly:
 
 Available values:
+  - `7.1`
   - `7.2`
   - `7.3` *(default)*
 
