@@ -1,5 +1,5 @@
 [include]
-files = supervisord.conf watchdog.conf
+files = supervisord.conf watchdog.conf {{ if (eq (getenv "ENVIRONMENT") "development") }}/srv/app/docker/supervisor/app.conf{{ end }}
 
 [program:nginx]
 command = nginx -c /etc/nginx/app.conf
