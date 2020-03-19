@@ -74,12 +74,10 @@ RUN \
         nginx=${NGINX_VERSION} \
     \
     ########
-    # Node #
+    # Node # 
     ########
-    \
-    && echo "deb https://deb.nodesource.com/node_8.x stretch main" > /etc/apt/sources.list.d/node.list \
-    && curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
-        | apt-key add - \
+    \ 
+    && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
     && curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg \
         | apt-key add - \
