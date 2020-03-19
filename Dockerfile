@@ -74,7 +74,7 @@ RUN \
         nginx=${NGINX_VERSION} \
     \
     ########
-    # Node # 
+    # Node #
     ########
     \ 
     && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
