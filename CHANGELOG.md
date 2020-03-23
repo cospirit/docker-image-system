@@ -8,32 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.1] - 2020-04-19
 ### Changed
-- Update Node 12
-- Update Php 7.2.33 (cli/fpm)
+- Update Node 12.16.1
 - Update Php 7.2.28 (cli/fpm)
 - Update Php 7.3.15 (cli/fpm)
-- Update curl 7.52.1
-- Update git 2.11.0
 - Update nginx 1.16.1
-- Update sudo 1.8.19
 - Update yarn 1.22.4
-- Update openssl 1.1.1
-- Update Php Extension - APCu
-- Update Php Extension - APCu-bc
-- Update Php Extension - igbinary
-- Update Php Extension - redis
-- Update Php Extension - xdebug
-- Update Php Extension - opcache
-- Update Php Extension - pgsql
-- Update Php Extension - curl
-- Update Php Extension - intl
-- Update Php Extension - json
-- Update Php Extension - mbstring
-- Update Php Extension - mysql
-- Update Php Extension - opcache
-- Update Php Extension - readline
-- Update Php Extension - xml
-- Update Php Extension - zip
 
 ## [1.4.0] - 2019-11-08
 ### Added
