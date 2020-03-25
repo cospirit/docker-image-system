@@ -10,6 +10,7 @@ RUN \
     GOMPLATE_VERSION="3.5.0" \
     SUPERVISOR_VERSION="4.0.3" \
     NGINX_VERSION="1.14.*" \
+    NODE_VERSION="12" \
     ##########
     # System #
     ##########
@@ -76,8 +77,10 @@ RUN \
     ########
     # Node #
     ########
-    \ 
-    && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+    \
+    && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x stretch main" > /etc/apt/sources.list.d/node.list \
+    && curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
+        | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
     && curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg \
         | apt-key add - \
