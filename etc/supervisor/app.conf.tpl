@@ -1,5 +1,5 @@
 [include]
-files = supervisord.conf watchdog.conf {{ if (eq (getenv "ENVIRONMENT") "development") }}/srv/app/docker/supervisor/app.conf{{ end }}
+files = supervisord.conf watchdog.conf
 
 [program:nginx]
 command = nginx -c /etc/nginx/app.conf
@@ -22,10 +22,14 @@ stderr_logfile = /dev/stderr
 stderr_logfile_maxbytes = 0
 {{- end }}
 
-{{- if (and (eq (getenv "APP") "nuxt") (eq (getenv "ENVIRONMENT") "production"))}}
+{{- if (eq (getenv "APP") "nuxt")}}
 [program:nuxt]
 directory=/srv/app/
+{{- if eq (getenv "ENVIRONMENT") "development"}}
+command=yarn watch
+{{- else }}
 command=npx nuxt-start
+{{- end }}
 autostart=true
 autorestart=true
 stderr_logfile = /dev/stderr
