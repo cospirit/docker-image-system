@@ -59,6 +59,10 @@ Available values:
   - `vuejs`
   - `nuxt`
 
+**NUXT_COMMAND** : define command to start nuxt server. The default value starts Nuxt in production mode.
+
+Default value: `npx nuxt-start`
+
 **NGINX_DIRECTIVES**: include pre-defined nginx inclusions directives. Must be in json array format.
 
 Default value: `["gzip", "error", "assets"]`
