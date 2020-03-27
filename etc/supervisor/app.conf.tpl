@@ -25,11 +25,7 @@ stderr_logfile_maxbytes = 0
 {{- if (eq (getenv "APP") "nuxt")}}
 [program:nuxt]
 directory=/srv/app/
-{{- if eq (getenv "ENVIRONMENT") "development"}}
-command=yarn watch
-{{- else }}
-command=npx nuxt-start
-{{- end }}
+command= {{ getenv "NUXT_COMMAND" (getenv "NUXT_COMMAND" "npx nuxt-start") }}
 autostart=true
 autorestart=true
 stderr_logfile = /dev/stderr

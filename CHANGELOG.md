@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2020-04-19
+### Added
+- Environment variable `NUXT_COMMAND`
+
 ## [1.4.1] - 2020-04-19
 ### Changed
 - Update Node 12.16.1
