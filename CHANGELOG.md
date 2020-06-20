@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Composer 1.10.7
 - Update Composer plugin pyrech/composer-changelogs v1.7.1
 - Update NodeJS 12.18.1
+- Update Goss v0.3.12
+- Update dgoss
 
 ### Removed
 - PHP 7.1
