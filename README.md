@@ -55,7 +55,7 @@ Available values:
   - `php`
   - `silex`
   - `symfony_2`
-  - `symfony_4`
+  - `symfony`
   - `vuejs`
   - `nuxt`
 

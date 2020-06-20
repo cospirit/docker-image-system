@@ -73,8 +73,8 @@ run/symfony_2: APP = symfony_2
 run/symfony_2: run
 
 ## Run temporary image's container / Symfony 4 (ENVIRONMENT,PHP_VERSION)
-run/symfony_4: APP = symfony_4
-run/symfony_4: run
+run/symfony: APP = symfony
+run/symfony: run
 
 ## Run temporary image's container / Vue.js (ENVIRONMENT)
 run/vuejs: APP = vuejs
