@@ -17,15 +17,6 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
-printf "\n\033[36mTEST\033[0m [Default - Php 7.1]\n\n"
-
-${DIR}/../dgoss run \
-    --env PHP_VERSION=7.1 \
-    --env APP=php \
-    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
-    ardeveloppement/system \
-    || ((RETURN++))
-
 printf "\n\033[36mTEST\033[0m [Default - Php 7.2]\n\n"
 
 ${DIR}/../dgoss run \
@@ -59,16 +50,6 @@ export GOSS_VARS=vars.development.yaml
 
 ${DIR}/../dgoss run \
     --env ENVIRONMENT=development \
-    --env APP=php \
-    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
-    ardeveloppement/system \
-    || ((RETURN++))
-
-printf "\n\033[36mTEST\033[0m [Development - Php 7.1]\n\n"
-
-${DIR}/../dgoss run \
-    --env ENVIRONMENT=development \
-    --env PHP_VERSION=7.1 \
     --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \
@@ -110,16 +91,6 @@ export GOSS_VARS=vars.production.yaml
 
 ${DIR}/../dgoss run \
     --env ENVIRONMENT=production \
-    --env APP=php \
-    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
-    ardeveloppement/system \
-    || ((RETURN++))
-
-printf "\n\033[36mTEST\033[0m [Production - Php 7.1]\n\n"
-
-${DIR}/../dgoss run \
-    --env ENVIRONMENT=production \
-    --env PHP_VERSION=7.1 \
     --env APP=php \
     --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
     ardeveloppement/system \

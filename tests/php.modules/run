@@ -15,15 +15,6 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
-printf "\n\033[36mTEST\033[0m [Default - Php 7.1]\n\n"
-
-export GOSS_VARS=vars.default.7.1.yaml
-
-${DIR}/../dgoss run \
-    --env PHP_VERSION=7.1 \
-    ardeveloppement/system \
-    || ((RETURN++))
-
 printf "\n\033[36mTEST\033[0m [Default - Php 7.2]\n\n"
 
 export GOSS_VARS=vars.default.7.2.yaml
@@ -57,14 +48,6 @@ export GOSS_VARS=vars.yaml
 
 ${DIR}/../dgoss run \
     --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql amqp" \
-    ardeveloppement/system \
-    || ((RETURN++))
-
-printf "\n\033[36mTEST\033[0m [Custom - Php 7.1]\n\n"
-
-${DIR}/../dgoss run \
-    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql amqp" \
-    --env PHP_VERSION=7.1 \
     ardeveloppement/system \
     || ((RETURN++))
 
