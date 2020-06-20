@@ -40,3 +40,4 @@ disabled:
   - redis
   - zip
   - mysqli
+  - amqp

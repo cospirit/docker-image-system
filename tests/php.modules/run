@@ -56,14 +56,14 @@ printf "\n\033[36mTEST\033[0m [Custom]\n\n"
 export GOSS_VARS=vars.yaml
 
 ${DIR}/../dgoss run \
-    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql" \
+    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql amqp" \
     ardeveloppement/system \
     || ((RETURN++))
 
 printf "\n\033[36mTEST\033[0m [Custom - Php 7.1]\n\n"
 
 ${DIR}/../dgoss run \
-    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql" \
+    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql amqp" \
     --env PHP_VERSION=7.1 \
     ardeveloppement/system \
     || ((RETURN++))
@@ -71,7 +71,7 @@ ${DIR}/../dgoss run \
 printf "\n\033[36mTEST\033[0m [Custom - Php 7.2]\n\n"
 
 ${DIR}/../dgoss run \
-    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql" \
+    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql amqp" \
     --env PHP_VERSION=7.2 \
     ardeveloppement/system \
     || ((RETURN++))
@@ -79,7 +79,7 @@ ${DIR}/../dgoss run \
 printf "\n\033[36mTEST\033[0m [Custom - Php 7.3]\n\n"
 
 ${DIR}/../dgoss run \
-    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql" \
+    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql amqp" \
     --env PHP_VERSION=7.3 \
     ardeveloppement/system \
     || ((RETURN++))
@@ -87,7 +87,7 @@ ${DIR}/../dgoss run \
 printf "\n\033[36mTEST\033[0m [Custom - Php 7.4]\n\n"
 
 ${DIR}/../dgoss run \
-    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql" \
+    --env PHP_MODULES_EXTRA="mysqlnd pdo_mysql pdo_pgsql amqp" \
     --env PHP_VERSION=7.4 \
     ardeveloppement/system \
     || ((RETURN++))

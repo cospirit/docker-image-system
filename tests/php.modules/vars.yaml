@@ -2,6 +2,7 @@ enabled:
   - mysqlnd
   - pdo_mysql
   - pdo_pgsql
+  - amqp
 
 disabled:
   - xdebug
