@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0] - 2020-06-20
+### Added
+- Php 7.4.7 (cli/fpm)
+- Php Extension - AMQP
+
+### Changed
+- Update Supervisor 4.2.0
+- Update Gosu 1.12
+- Update Gomplate 3.7.0
+- Change `symfony_4` application with `symfony`
+- Update Php 7.2.31 (cli/fpm)
+- Update Php 7.3.19 (cli/fpm)
+- Update Composer 1.10.7
+- Update Composer plugin pyrech/composer-changelogs v1.7.1
+- Update NodeJS 12.18.1
+
+### Removed
+- PHP 7.1
+
 ## [1.5.0] - 2020-04-19
 ### Added
 - Environment variable `NUXT_COMMAND`
