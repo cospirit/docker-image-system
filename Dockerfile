@@ -6,10 +6,10 @@ RUN \
     ############
     # Versions #
     ############
-    GOSU_VERSION="1.11" \
-    GOMPLATE_VERSION="3.5.0" \
-    SUPERVISOR_VERSION="4.0.3" \
-    NGINX_VERSION="1.14.*" \
+    GOSU_VERSION="1.12" \
+    GOMPLATE_VERSION="3.7.0" \
+    SUPERVISOR_VERSION="4.2.0" \
+    NGINX_VERSION="1.16.*" \
     NODE_VERSION="12" \
     ##########
     # System #
