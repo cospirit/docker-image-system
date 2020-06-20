@@ -89,7 +89,7 @@ command:
   supervisord --version:
     exit-status: 0
     stdout:
-      - /^4.0.3$/
+      - /^4.2.0$/
   # Make
   make --version:
     exit-status: 0
@@ -109,12 +109,12 @@ command:
   gosu:
     exit-status: 1
     stderr:
-      - '/^gosu version: 1.11/'
+      - '/^gosu version: 1.12/'
   # Gomplate
   gomplate --version:
     exit-status: 0
     stdout:
-      - /^gomplate version 3.5.0$/
+      - /^gomplate version 3.7.0$/
   # Passwordless sudoer
   su app -c "sudo whoami":
     exit-status: 0
