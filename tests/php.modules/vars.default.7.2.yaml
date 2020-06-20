@@ -6,6 +6,7 @@ enabled:
   - mbstring
   - json
   - posix
+  - wddx
   - dom
   - intl
   - sysvmsg

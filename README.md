@@ -77,7 +77,8 @@ Available values:
 Available values:
   - `7.1`
   - `7.2`
-  - `7.3` *(default)*
+  - `7.3`
+  - `7.4` *(default)*
 
 **PHP_MODULES_EXTRA**: define extra php modules to load. Be careful of some subtleties, where some modules have hidden dependencies:
   - `mysqlnd` *mysqlnd pdo_mysql*

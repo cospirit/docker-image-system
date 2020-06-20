@@ -42,4 +42,13 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
+printf "\n\033[36mTEST\033[0m [7.4]\n\n"
+
+export GOSS_VARS=vars.7.4.yaml
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.4 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
 exit ${RETURN}
