@@ -9,7 +9,7 @@ stderr_logfile = /dev/stderr
 stderr_logfile_maxbytes = 0
 
 {{/* Only for php related app */}}
-{{- if has (slice "php" "silex" "symfony_2" "symfony_4") (getenv "APP") }}
+{{- if has (slice "php" "silex" "symfony_2" "symfony") (getenv "APP") }}
 [program:php]
 {{- if has (slice "7.1" "7.2") (getenv "PHP_VERSION") }}
 command = /root/php-fpm

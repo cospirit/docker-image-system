@@ -127,7 +127,7 @@ http {
         }
     {{- end }}
 
-{{- else if eq (getenv "APP") "symfony_4" }}
+{{- else if eq (getenv "APP") "symfony" }}
 
         root /srv/app/public;
 
@@ -184,7 +184,7 @@ http {
         }
 
         location = /ping {
-{{- if has (slice "php" "silex" "symfony_2" "symfony_4") (getenv "APP") }}
+{{- if has (slice "php" "silex" "symfony_2" "symfony") (getenv "APP") }}
             include app_php;
             fastcgi_param SCRIPT_NAME /ping;
             fastcgi_param SCRIPT_FILENAME /ping;
@@ -198,7 +198,7 @@ http {
             stub_status on;
         }
 
-{{- if has (slice "php" "silex" "symfony_2" "symfony_4") (getenv "APP") }}
+{{- if has (slice "php" "silex" "symfony_2" "symfony") (getenv "APP") }}
         location = /php/status {
             include app_php;
             fastcgi_param SCRIPT_NAME /status;

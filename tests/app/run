@@ -65,13 +65,13 @@ ${DIR}/../dgoss run \
     ardeveloppement/system \
     || ((RETURN++))
 
-printf "\n\033[36mTEST\033[0m [Symfony 4]\n\n"
+printf "\n\033[36mTEST\033[0m [Symfony 4+]\n\n"
 
-export GOSS_VARS=vars.symfony_4.yaml
+export GOSS_VARS=vars.symfony.yaml
 
 ${DIR}/../dgoss run \
-    --env APP=symfony_4 \
-    --mount type=bind,source=${DIR}/fixtures/symfony_4,target=/srv/app \
+    --env APP=symfony \
+    --mount type=bind,source=${DIR}/fixtures/symfony,target=/srv/app \
     ardeveloppement/system \
     || ((RETURN++))
 
