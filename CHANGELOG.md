@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update Php 7.2.31 (cli/fpm)
 - Update Php 7.3.19 (cli/fpm)
 - Update Composer 1.10.7
+- Update Composer plugin hirak/prestissimo 0.3.10
+- Update Composer plugin sllh/composer-versions-check v2.0.4
 - Update Composer plugin pyrech/composer-changelogs v1.7.1
 - Update NodeJS 12.18.1
 - Update Goss v0.3.12
