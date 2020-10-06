@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Please use the following guidelines to format all your commit
+# messages:
+#
+#     <type>(<scope>): <subject>
+#     <BLANK LINE>
+#     <body>
+#     <BLANK LINE>
+#     <footer>
+#
+# Please note that:
+#  - The HEADER is a single line of max. 50 characters that
+#    contains a succinct description of the change. It contains a
+#    type, an optional scope, and a subject
+#       + <type> describes the kind of change that this commit is
+#                providing. Allowed types are:
+#             * feat (feature)
+#             * fix (bug fix)
+#             * docs (documentation)
+#             * style (formatting, missing semicolons, …)
+#             * refactor
+#             * test (when adding missing tests)
+#             * chore (maintain)
+#       + <scope> can be anything specifying the place of the commit
+#                 change
+#       + <subject> is a very short description of the change, in
+#                   the following format:
+#             * imperative, present tense: “change” not
+#               “changed”/“changes”
+#             * no capitalised first letter
+#             * no dot (.) at the end
+#  - The BODY should include the motivation for the change and
+#    contrast this with previous behavior and must be phrased in
+#    imperative present tense
+#  - The FOOTER should contain any information about Breaking
+#    Changes and is also the place to reference GitHub issues that
+#    this commit closes
+#
+# Thank you <3
+
+
+# Create a regex for a conventional commit.
+convetional_commit_regex="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z \-]+\))?!?: .+$"
+
+# Get the commit message (the parameter we're given is just the path to the
+# temporary file which holds the message).
+commit_message=$(cat "$1")
+
+# Check the message, if we match, all good baby.
+if [[ "$commit_message" =~ $convetional_commit_regex ]]; then
+   exit 0
+fi
+
+# Uh-oh, this is not a conventional commit, show an example and link to the spec.
+echo -e "\e[31mThe commit message does not meet the Conventional Commit standard\e[0m"
+echo "An example of a valid message is: "
+echo "  feat(login): add the 'remember me' button"
+echo "More details at: https://www.conventionalcommits.org/en/v1.0.0/#summary"
+exit 1

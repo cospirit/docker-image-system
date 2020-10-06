@@ -30,6 +30,18 @@ phar.phar   manual  /usr/bin/phar.phar${PHP_VERSION}
 EOF
 fi
 
+###########################
+# Git - install git hooks #
+###########################
+
+cd /etc/git/hooks && ls | xargs chmod +x
+
+if [ ! -d "/srv/app/.git" ]; then
+  mkdir -p /srv/app/.git/hooks;
+fi
+
+cp /etc/git/hooks/* /srv/app/.git/hooks
+
 #################
 # Php - Modules #
 #################

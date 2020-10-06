@@ -144,11 +144,12 @@ RUN \
 
 COPY etc/supervisor/ /etc/supervisor/
 COPY etc/nginx/      /etc/nginx/
+COPY etc/git/hooks   /etc/git/hooks/
 COPY etc/php/        /etc/php/7.2/
 COPY etc/php/        /etc/php/7.3/
 COPY etc/php/        /etc/php/7.4/
 
-COPY root/ /root/
+COPY root/           /root/
 
 ENV APP="" \
     PHP_VERSION="7.4" \
