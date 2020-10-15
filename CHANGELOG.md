@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1] - 2020-10-15
+### Added
+- Environment variable `PHP_MAX_INPUT_VARS`
+- Environment variable `PHP_FPM_MAX_INPUT_VARS`
+- Environment variable `PHP_CLI_MAX_INPUT_VARS`
+
 ## [2.0] - 2020-06-20
 ### Added
 - Php 7.4.7 (cli/fpm)

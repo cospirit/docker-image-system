@@ -60,6 +60,9 @@ realpath_cache_ttl = 600
 ; Maximum amount of memory a script may consume.
 memory_limit = {{ getenv "PHP_CLI_MEMORY_LIMIT" (getenv "PHP_MEMORY_LIMIT" "-1") }}
 
+; How many GET/POST/COOKIE input variables may be accepted
+max_input_vars = {{ getenv "PHP_CLI_MAX_INPUT_VARS" (getenv "PHP_MAX_INPUT_VARS" "1000") }}
+
 ;;;;;;;;;;;;;;;;;
 ; Data Handling ;
 ;;;;;;;;;;;;;;;;;

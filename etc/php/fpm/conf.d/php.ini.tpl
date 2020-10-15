@@ -64,6 +64,9 @@ max_execution_time = {{ getenv "PHP_FPM_MAX_EXECUTION_TIME" "30" }}
 ; Maximum amount of memory a script may consume.
 memory_limit = {{ getenv "PHP_FPM_MEMORY_LIMIT" (getenv "PHP_MEMORY_LIMIT" "128M") }}
 
+; How many GET/POST/COOKIE input variables may be accepted
+max_input_vars = {{ getenv "PHP_FPM_MAX_INPUT_VARS" (getenv "PHP_MAX_INPUT_VARS" "1000") }}
+
 ;;;;;;;;;;;;;;;;;
 ; Data Handling ;
 ;;;;;;;;;;;;;;;;;
