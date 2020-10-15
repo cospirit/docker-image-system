@@ -34,7 +34,6 @@ fi
 # Php - Modules #
 #################
 
-PHP_MODULES_DEFAULT_7_1="mbstring json apcu calendar curl phar ftp pdo exif posix xmlwriter fileinfo readline sysvsem opcache sysvshm ctype gettext xml dom simplexml xmlreader xsl apcu_bc tokenizer intl shmop sysvmsg wddx iconv sockets"
 PHP_MODULES_DEFAULT_7_2="mbstring json apcu calendar curl phar ftp pdo exif posix xmlwriter fileinfo readline sysvsem opcache sysvshm ctype gettext xml dom simplexml xmlreader xsl apcu_bc tokenizer intl shmop sysvmsg wddx iconv sockets"
 PHP_MODULES_DEFAULT_7_3="mbstring json apcu calendar curl phar ftp pdo exif posix xmlwriter fileinfo readline sysvsem opcache sysvshm ctype gettext xml dom simplexml xmlreader xsl apcu_bc tokenizer intl shmop sysvmsg wddx iconv sockets"
 PHP_MODULES_DEFAULT_7_4="mbstring json apcu calendar curl phar ftp pdo exif posix xmlwriter fileinfo readline sysvsem opcache sysvshm ctype gettext xml dom simplexml xmlreader xsl apcu_bc tokenizer intl shmop sysvmsg iconv sockets"

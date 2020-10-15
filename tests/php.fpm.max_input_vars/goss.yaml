@@ -1,0 +1,6 @@
+http:
+  # App
+  http://localhost:
+    status: 200
+    body:
+      - '/^max_input_vars: {{ .Vars.max_input_vars }}$/'

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+export GOSS_PATH=${DIR}/../goss-linux-amd64
+export GOSS_FILES_PATH=${DIR}
+
+${DIR}/../dgoss edit \
+    --env APP=php \
+    --mount type=bind,source=${DIR}/fixtures/app,target=/srv/app \
+    ardeveloppement/system
