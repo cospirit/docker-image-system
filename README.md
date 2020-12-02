@@ -1,7 +1,7 @@
 # Docker Image - System
 [![Image version](https://images.microbadger.com/badges/version/ardeveloppement/system.svg)][microbadger]
 [![Image layers](https://images.microbadger.com/badges/image/ardeveloppement/system.svg)][microbadger]
-[![CircleCI](https://circleci.com/gh/ArDeveloppement/docker-image-system.svg?style=shield&circle-token=aafc265e52c67ba156b7baa402d68ba91aebb93b)][circleci]
+[![CircleCI](https://circleci.com/gh/cospirit/docker-image-system.svg?style=shield&circle-token=aafc265e52c67ba156b7baa402d68ba91aebb93b)][circleci]
 
 ## Development workflow
 
@@ -101,4 +101,4 @@ Default value: `3`
 
 
 [microbadger]: https://microbadger.com/images/ardeveloppement/system
-[circleci]:    https://circleci.com/gh/ArDeveloppement/docker-image-system
+[circleci]:    https://circleci.com/gh/cospirit/docker-image-system
