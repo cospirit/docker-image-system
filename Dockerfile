@@ -8,7 +8,7 @@ RUN \
     ############
     GOSU_VERSION="1.12" \
     GOMPLATE_VERSION="3.7.0" \
-    SUPERVISOR_VERSION="4.2.0" \
+    SUPERVISOR_VERSION="4.2.2" \
     NGINX_VERSION="1.16.*" \
     NODE_VERSION="12" \
     ##########
@@ -17,6 +17,7 @@ RUN \
     \
     BUILD_PACKAGES=" \
         python-setuptools \
+        python-pip \
     " \
     # Disable irrelevants apt-key warnings
     && export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="1" \
@@ -61,7 +62,7 @@ RUN \
     \
     && apt-get install -y --no-install-recommends \
         python-pkg-resources \
-    && easy_install supervisor==${SUPERVISOR_VERSION} \
+    && pip install supervisor==${SUPERVISOR_VERSION} \
     \
     #########
     # Nginx #
@@ -107,20 +108,19 @@ RUN \
         php7.2-xml php7.3-xml php7.4-xml \
         php7.2-mbstring php7.3-mbstring php7.4-mbstring \
         php7.2-intl php7.3-intl php7.4-intl \
-        php-apcu-bc \
+        php7.2-apcu-bc php7.3-apcu-bc php7.4-apcu-bc\
         # Modules - Extra
         php7.2-zip php7.3-zip php7.4-zip \
         php7.2-mysql php7.3-mysql php7.4-mysql \
         php7.2-pgsql php7.3-pgsql php7.4-pgsql \
-        php-amqp \
-        php-redis \
-        php-xdebug \
+        php7.2-amqp php7.3-amqp php7.4-amqp \
+        php7.2-redis php7.3-redis php7.4-redis \
+        php7.2-xdebug php7.3-xdebug php7.4-xdebug\
     # Composer
     && curl -sSL https://getcomposer.org/installer \
         | php -- --install-dir /usr/local/bin --filename composer \
     && su app -l -c "\
         composer global require \
-            hirak/prestissimo \
             sllh/composer-versions-check \
             pyrech/composer-changelogs \
         && rm -rf ~/.composer/cache \
@@ -136,7 +136,7 @@ RUN \
         /var/cache/debconf/*-old \
         /var/lib/dpkg/*-old \
     && truncate -s 0 /var/log/*.log \
-    && truncate -s 0 /var/log/**/*.log 
+    && truncate -s 0 /var/log/**/*.log
 
 ##########
 # Config #

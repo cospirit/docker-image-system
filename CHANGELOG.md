@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Environment variable `PHP_MAX_INPUT_VARS`
 - Environment variable `PHP_FPM_MAX_INPUT_VARS`
 - Environment variable `PHP_CLI_MAX_INPUT_VARS`
+- Environment variable `NGINX_FASTCGI_BUFFER_SIZE`
 
 ## [2.0] - 2020-06-20
 ### Added
