@@ -37,6 +37,9 @@ http {
     {{- end }}
 {{- end }}
 
+{{- if getenv "NGINX_FASTCGI_BUFFER_SIZE" }}
+    fastcgi_buffer_size {{ getenv "NGINX_FASTCGI_BUFFER_SIZE" }};
+{{- end }}
 {{- if getenv "NGINX_FASTCGI_BUFFERS" }}
     fastcgi_buffers {{ getenv "NGINX_FASTCGI_BUFFERS" }};
 {{- end }}

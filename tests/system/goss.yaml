@@ -89,7 +89,7 @@ command:
   supervisord --version:
     exit-status: 0
     stdout:
-      - /^4.2.0$/
+      - /^4.2.2$/
   # Make
   make --version:
     exit-status: 0
