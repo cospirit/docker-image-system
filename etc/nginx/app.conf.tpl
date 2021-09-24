@@ -144,12 +144,41 @@ http {
         }
 
 {{- else if eq (getenv "APP") "vuejs" }}
-
         root /srv/app/dist;
 
-        location / {
-            try_files $uri $uri/ /index.html =404;
-        }
+        {{ if eq (getenv "ENVIRONMENT") "development" }}
+            location / {
+                add_header Pragma "no-cache";
+                add_header Cache-Control "no-store, must-revalidate";
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+                proxy_http_version 1.1;
+                proxy_pass http://127.0.0.1:8080;
+            }
+            location /sockjs-node {
+                proxy_set_header X-Real-IP  $remote_addr;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header Host $host;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_redirect off;
+                proxy_http_version 1.1;
+                proxy_pass http://127.0.0.1:8080;
+            }
+        {{- else }}
+            location / {
+                index  index.html;
+                try_files $uri <0uri> /index.html;
+            }
+
+            error_page   500 502 503 504  /50x.html;
+
+            location = /50x.html {
+                root   /usr/share/nginx/html;
+            }
+        {{- end }}
 
 {{- else if eq (getenv "APP") "nuxt" }}
         root /srv/app/.nuxt;
