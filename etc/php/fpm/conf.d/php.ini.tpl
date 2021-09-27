@@ -22,8 +22,8 @@ opcache.validate_timestamps = On
 ; XDebug ;
 ;;;;;;;;;;
 
-xdebug.remote_enable = On
-xdebug.remote_autostart = On
+xdebug.mode = debug
+xdebug.start_with_request = yes
 
 {{- else }}
 
@@ -107,4 +107,4 @@ apc.ttl = 3600
 
 [xdebug]
 
-xdebug.remote_port = {{ getenv "PHP_FPM_XDEBUG_REMOTE_PORT" (getenv "PHP_XDEBUG_REMOTE_PORT" "9000") }}
+xdebug.client_port = {{ getenv "PHP_FPM_XDEBUG_REMOTE_PORT" (getenv "PHP_XDEBUG_REMOTE_PORT" "9000") }}
