@@ -156,6 +156,8 @@ http {
                 proxy_cache_bypass $http_upgrade;
                 proxy_http_version 1.1;
                 proxy_pass http://127.0.0.1:8080;
+                index  index.html;
+                try_files $uri <0uri> /index.html;
             }
             location /sockjs-node {
                 proxy_set_header X-Real-IP  $remote_addr;
