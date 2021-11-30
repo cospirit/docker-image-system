@@ -175,6 +175,11 @@ http {
                 try_files $uri <0uri> /index.html;
             }
 
+            location ~* \.(jpe?g|png|gif|ico|json)$ {
+                root /srv/app/public;
+                try_files $uri $uri/ /index.html;
+            }
+
             error_page   500 502 503 504  /50x.html;
 
             location = /50x.html {
