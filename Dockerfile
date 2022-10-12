@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 LABEL maintainer="AR Developpement <support-arconnect@cospirit.com>"
 
@@ -68,7 +68,7 @@ RUN \
     # Nginx #
     #########
     \
-    && echo "deb http://nginx.org/packages/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list \
+    && echo "deb http://nginx.org/packages/debian/ buster nginx" > /etc/apt/sources.list.d/nginx.list \
     && curl -sSL http://nginx.org/keys/nginx_signing.key \
         | apt-key add - \
     && apt-get update \
@@ -79,7 +79,7 @@ RUN \
     # Node #
     ########
     \
-    && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x stretch main" > /etc/apt/sources.list.d/node.list \
+    && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x buster main" > /etc/apt/sources.list.d/node.list \
     && curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
         | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
@@ -88,16 +88,18 @@ RUN \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         nodejs \
-        yarn \
-    \
+        yarn;
+
     #######
     # Php #
     #######
-    \
-    && echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
-    && curl -sSL https://packages.sury.org/php/apt.gpg --output /etc/apt/trusted.gpg.d/php.gpg \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
+
+RUN apt install wget apt-transport-https lsb-release ca-certificates -y
+RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+RUN apt update
+
+RUN apt install -y --no-install-recommends \
         php7.2-cli php7.3-cli php7.4-cli \
         php7.2-fpm php7.3-fpm php7.4-fpm \
         # Modules - Default
@@ -108,7 +110,7 @@ RUN \
         php7.2-xml php7.3-xml php7.4-xml \
         php7.2-mbstring php7.3-mbstring php7.4-mbstring \
         php7.2-intl php7.3-intl php7.4-intl \
-        php7.2-apcu-bc php7.3-apcu-bc php7.4-apcu-bc\
+        php7.2-apcu-bc php7.3-apcu-bc php7.4-apcu \
         # Modules - Extra
         php7.2-zip php7.3-zip php7.4-zip \
         php7.2-mysql php7.3-mysql php7.4-mysql \
@@ -118,7 +120,7 @@ RUN \
         php7.2-xdebug php7.3-xdebug php7.4-xdebug\
     # Composer
     && curl -sSL https://getcomposer.org/installer \
-        | php -- --install-dir /usr/local/bin --filename composer \
+        | php -- --install-dir /usr/local/bin --filename composer --version=1.10.1 \
     && su app -l -c "\
         composer global require \
             sllh/composer-versions-check \
@@ -147,6 +149,7 @@ COPY etc/nginx/      /etc/nginx/
 COPY etc/php/        /etc/php/7.2/
 COPY etc/php/        /etc/php/7.3/
 COPY etc/php/        /etc/php/7.4/
+COPY etc/php/        /etc/php/8.1/
 
 COPY root/ /root/
 
