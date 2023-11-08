@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:bookworm
 
 LABEL maintainer="AR Developpement <support-arconnect@cospirit.com>"
 
@@ -10,20 +10,16 @@ RUN \
     GOMPLATE_VERSION="3.7.0" \
     SUPERVISOR_VERSION="4.2.0" \
     NGINX_VERSION="1.16.*" \
-    NODE_VERSION="12" \
+    NODE_VERSION="18" \
     ##########
     # System #
     ##########
-    \
-    BUILD_PACKAGES=" \
-        python-setuptools \
-    " \
     # Disable irrelevants apt-key warnings
     && export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE="1" \
     # Disable all debian user interaction
     && export DEBIAN_FRONTEND="noninteractive" \
     && apt-get update \
-    && apt-get install -y --no-install-recommends ${BUILD_PACKAGES} \
+    && apt-get install -y --no-install-recommends \
         apt-utils \
         gnupg \
         dirmngr \
@@ -37,6 +33,10 @@ RUN \
         make \
         git \
         unzip \
+        python3-full \
+        python3-pip \
+    && apt-get update \
+    && pip3 install setuptools \
     # User
     && adduser --disabled-password --gecos "" app \
     # Sudo
@@ -67,7 +67,7 @@ RUN \
     # Nginx #
     #########
     \
-    && echo "deb http://nginx.org/packages/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list \
+    && echo "deb http://nginx.org/packages/debian/ bookworm nginx" > /etc/apt/sources.list.d/nginx.list \
     && curl -sSL http://nginx.org/keys/nginx_signing.key \
         | apt-key add - \
     && apt-get update \
@@ -78,7 +78,7 @@ RUN \
     # Node #
     ########
     \
-    && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x stretch main" > /etc/apt/sources.list.d/node.list \
+    && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x bookworm main" > /etc/apt/sources.list.d/node.list \
     && curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
         | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
@@ -93,7 +93,7 @@ RUN \
     # Php #
     #######
     \
-    && echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
+    && echo "deb https://packages.sury.org/php/ bookworm main" > /etc/apt/sources.list.d/php.list \
     && curl -sSL https://packages.sury.org/php/apt.gpg --output /etc/apt/trusted.gpg.d/php.gpg \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -136,7 +136,7 @@ RUN \
         /var/cache/debconf/*-old \
         /var/lib/dpkg/*-old \
     && truncate -s 0 /var/log/*.log \
-    && truncate -s 0 /var/log/**/*.log 
+    && truncate -s 0 /var/log/**/*.log
 
 ##########
 # Config #
