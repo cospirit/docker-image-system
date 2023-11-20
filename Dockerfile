@@ -10,7 +10,7 @@ RUN \
     GOMPLATE_VERSION="3.7.0" \
     SUPERVISOR_VERSION="4.2.2" \
     NGINX_VERSION="1.16.*" \
-    NODE_VERSION="12" \
+    NODE_VERSION="20" \
     ##########
     # System #
     ##########
@@ -88,7 +88,8 @@ RUN \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         nodejs \
-        yarn;
+        yarn \
+        RUN yarn global add node-gyp;
 
     #######
     # Php #
