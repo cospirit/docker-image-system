@@ -112,6 +112,8 @@ RUN apt install -y --no-install-recommends \
         php7.2-intl php7.3-intl php7.4-intl php8.1-intl \
         php7.2-apcu-bc php7.3-apcu-bc php7.4-apcu php8.1-apcu \
         # Modules - Extra
+        php7.2-gd php7.3-gd php7.4-gd php8.1-gd \
+        php7.2-ldap php7.3-ldap php7.4-ldap php8.1-ldap \
         php7.2-zip php7.3-zip php7.4-zip php8.1-zip \
         php7.2-mysql php7.3-mysql php7.4-mysql php8.1-mysql \
         php7.2-pgsql php7.3-pgsql php7.4-pgsql php8.1-pgsql \
