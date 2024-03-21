@@ -22,8 +22,8 @@ opcache.validate_timestamps = On
 ; XDebug ;
 ;;;;;;;;;;
 
-xdebug.remote_enable = On
-xdebug.remote_autostart = On
+xdebug.mode = debug
+xdebug.start_with_request = yes
 
 {{- else }}
 
@@ -63,6 +63,9 @@ max_execution_time = {{ getenv "PHP_FPM_MAX_EXECUTION_TIME" "30" }}
 
 ; Maximum amount of memory a script may consume.
 memory_limit = {{ getenv "PHP_FPM_MEMORY_LIMIT" (getenv "PHP_MEMORY_LIMIT" "128M") }}
+
+; How many GET/POST/COOKIE input variables may be accepted
+max_input_vars = {{ getenv "PHP_FPM_MAX_INPUT_VARS" (getenv "PHP_MAX_INPUT_VARS" "1000") }}
 
 ;;;;;;;;;;;;;;;;;
 ; Data Handling ;
@@ -104,4 +107,4 @@ apc.ttl = 3600
 
 [xdebug]
 
-xdebug.remote_port = {{ getenv "PHP_FPM_XDEBUG_REMOTE_PORT" (getenv "PHP_XDEBUG_REMOTE_PORT" "9000") }}
+xdebug.client_port = {{ getenv "PHP_FPM_XDEBUG_REMOTE_PORT" (getenv "PHP_XDEBUG_REMOTE_PORT" "9000") }}

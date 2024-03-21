@@ -1,0 +1,5 @@
+command:
+  php --ri Core:
+    exit-status: 0
+    stdout:
+      - /^max_input_vars => {{ .Vars.Core.max_input_vars }} => {{ .Vars.Core.max_input_vars }}$/

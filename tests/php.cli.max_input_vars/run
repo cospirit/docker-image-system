@@ -1,0 +1,95 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+export GOSS_PATH=${DIR}/../goss-linux-amd64
+export GOSS_FILES_PATH=${DIR}
+
+RETURN=0
+
+printf "\n\033[36mTEST\033[0m [Default]\n\n"
+
+export GOSS_VARS=vars.default.yaml
+
+${DIR}/../dgoss run \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Default - Php 7.2]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.2 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Default - Php 7.3]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.3 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Default - Php 7.4]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_VERSION=7.4 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Custom]\n\n"
+
+export GOSS_VARS=vars.yaml
+
+${DIR}/../dgoss run \
+    --env PHP_MAX_INPUT_VARS=1200 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+${DIR}/../dgoss run \
+    --env PHP_CLI_MAX_INPUT_VARS=1200 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Custom - Php 7.2]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_MAX_INPUT_VARS=1200 \
+    --env PHP_VERSION=7.2 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+${DIR}/../dgoss run \
+    --env PHP_CLI_MAX_INPUT_VARS=1200 \
+    --env PHP_VERSION=7.2 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Custom - Php 7.3]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_MAX_INPUT_VARS=1200 \
+    --env PHP_VERSION=7.3 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+${DIR}/../dgoss run \
+    --env PHP_CLI_MAX_INPUT_VARS=1200 \
+    --env PHP_VERSION=7.3 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [Custom - Php 7.4]\n\n"
+
+${DIR}/../dgoss run \
+    --env PHP_MAX_INPUT_VARS=1200 \
+    --env PHP_VERSION=7.4 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+${DIR}/../dgoss run \
+    --env PHP_CLI_MAX_INPUT_VARS=1200 \
+    --env PHP_VERSION=7.4 \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+exit ${RETURN}

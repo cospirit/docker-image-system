@@ -1,0 +1,33 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+export GOSS_PATH=${DIR}/../goss-linux-amd64
+export GOSS_FILES_PATH=${DIR}
+
+RETURN=0
+
+printf "\n\033[36mTEST\033[0m [NGINX - No env var is defined]\n\n"
+
+export GOSS_VARS=vars.default.yaml
+
+${DIR}/../dgoss run \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+printf "\n\033[36mTEST\033[0m [NGINX - All env vars are defined]\n\n"
+
+export GOSS_VARS=vars.yaml
+
+${DIR}/../dgoss run \
+    --env NGINX_REAL_IP_HEADER="X-Forwarded-For" \
+    --env NGINX_SET_REAL_IP_FROM="[\"192.168.2.1\"]" \
+    --env NGINX_FASTCGI_BUFFER_SIZE="128k" \
+    --env NGINX_FASTCGI_BUFFERS="4 256k" \
+    --env NGINX_FASTCGI_MAX_TEMP_FILE_SIZE="512m" \
+    --env NGINX_FASTCGI_READ_TIMEOUT="30s" \
+    --env NGINX_CLIENT_MAX_BODY_SIZE="5m" \
+    ardeveloppement/system \
+    || ((RETURN++))
+
+exit ${RETURN}
