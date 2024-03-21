@@ -9,8 +9,8 @@ RUN \
     GOSU_VERSION="1.12" \
     GOMPLATE_VERSION="3.7.0" \
     SUPERVISOR_VERSION="4.2.2" \
-    NGINX_VERSION="1.16.*" \
-    NODE_VERSION="20" \
+    NGINX_VERSION="1.22.*" \
+    NODE_VERSION="16" \
     ##########
     # System #
     ##########
@@ -88,15 +88,15 @@ RUN \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         nodejs \
-        yarn \
-        RUN yarn global add node-gyp;
+        yarn
+RUN yarn global add node-gyp;
 
     #######
     # Php #
     #######
 
 RUN apt install wget lsb-release ca-certificates -y
-RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+RUN curl -sS https://packages.sury.org/php/apt.gpg | apt-key add -
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 RUN apt update
 
