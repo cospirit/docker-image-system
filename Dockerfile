@@ -124,7 +124,6 @@ RUN apt install -y --no-install-recommends \
     && su app -l -c "\
         composer global require \
             sllh/composer-versions-check \
-            pyrech/composer-changelogs \
         && rm -rf ~/.composer/cache \
     " \
     \
